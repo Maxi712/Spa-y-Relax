@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Modelo;
+package Persistencia;
 
+import Modelo.Conexion;
 import spaentrededos.Cliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,11 +20,11 @@ import javax.swing.JOptionPane;
  *
  * @author carrizoAnna
  */
-public class ClienteData {
+public class entidadData {
 
     private Connection con = null;
 
-    public ClienteData(Conexion conexion) {
+    public entidadData(Conexion conexion) {
         this.con = conexion.getConexion();
     }
 
@@ -51,7 +52,7 @@ public class ClienteData {
             System.out.println("guardado");
             JOptionPane.showMessageDialog(null, "Cliente guardado correctamente.");
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(entidadData.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error al guardar cliente.");
         }
     }
@@ -105,7 +106,7 @@ public class ClienteData {
             System.out.println(" actualizado");
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(entidadData.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
@@ -123,8 +124,7 @@ public class ClienteData {
             ps.close();
 
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteData.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(entidadData.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }
