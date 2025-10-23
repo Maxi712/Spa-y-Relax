@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -55,6 +57,29 @@ public class entidadData {
             Logger.getLogger(entidadData.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Error al guardar cliente.");
         }
+    }
+        public ArrayList<Cliente> listarCliente(){
+        ArrayList <Cliente> listaC = new ArrayList();
+        String sql = "SELECT * FROM alumno ";
+        try{
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+              int codCli = rs.getInt("codCli");
+              int dni = rs.getInt("dni");
+              String nombreCompleto = rs.getString("nombreCompleto");
+              int telefono = rs.getInt("telefono");
+              int edad=rs.getInt("edad");
+              String afecciones = rs.getString("afecciones");
+              boolean estado = rs.getBoolean("estado");
+              Cliente c = new Cliente(codCli, dni, nombreCompleto, telefono, edad, afecciones, estado);
+              listaC.add(c);
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno ..."+ex.getMessage());
+        }
+        return listaC;
     }
 
     public Cliente buscarCliente(int id) {
