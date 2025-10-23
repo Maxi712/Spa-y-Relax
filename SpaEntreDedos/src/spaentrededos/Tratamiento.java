@@ -13,6 +13,7 @@ public class Tratamiento {
     private LocalTime duracion;
     private double costo;
     private boolean estado;
+    private int totalSesiones;
 
     public Tratamiento(int codTratam, String nombre, String tipo, String detalle, List<Instalacion> productos, LocalTime duracion, double costo, boolean estado) {
         this.codTratam = codTratam;
@@ -24,7 +25,12 @@ public class Tratamiento {
         this.costo = costo;
         this.estado = estado;
     }
-
+public Tratamiento(int codTratam, String nombre, String tipo, int totalSesiones){
+    this.codTratam = codTratam;
+    this.nombre = nombre;
+    this.tipo = tipo;
+    this.totalSesiones = totalSesiones;
+}
     public int getCodTratam() {
         return codTratam;
     }
