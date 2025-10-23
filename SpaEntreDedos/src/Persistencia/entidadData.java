@@ -60,7 +60,7 @@ public class entidadData {
     }
         public ArrayList<Cliente> listarCliente(){
         ArrayList <Cliente> listaC = new ArrayList();
-        String sql = "SELECT * FROM alumno ";
+        String sql = "SELECT * FROM cliente ";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
