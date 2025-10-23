@@ -10,6 +10,9 @@ public class Cliente {
     private String afecciones;
     private boolean estado;
 
+    public Cliente() {
+    }
+
     public Cliente(int codCli, int dni, String nombreCompleto, int telefono, int edad, String afecciones, boolean estado) {
         this.codCli = codCli;
         this.dni = dni;
