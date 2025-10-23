@@ -9,13 +9,13 @@ public class Sesion {
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaHoraFin;
     private String tratamiento;
-    private String consultorio;
+    private Consultorio consultorio;
     private Masajista masajista;
     private List<Instalacion> instalacion;
     private Dia_De_Spa diaDeSpa;
     private boolean estado;
 
-    public Sesion(int codSesion, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin, String tratamiento, String consultorio, Masajista masajista, List<Instalacion> instalacion, Dia_De_Spa diaDeSpa, boolean estado) {
+    public Sesion(int codSesion, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin, String tratamiento, Consultorio consultorio, Masajista masajista, List<Instalacion> instalacion, Dia_De_Spa diaDeSpa, boolean estado) {
         this.codSesion = codSesion;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFin = fechaHoraFin;
@@ -59,11 +59,11 @@ public class Sesion {
         this.tratamiento = tratamiento;
     }
 
-    public String getConsultorio() {
+    public Consultorio getConsultorio() {
         return consultorio;
     }
 
-    public void setConsultorio(String consultorio) {
+    public void setConsultorio(Consultorio consultorio) {
         this.consultorio = consultorio;
     }
 
