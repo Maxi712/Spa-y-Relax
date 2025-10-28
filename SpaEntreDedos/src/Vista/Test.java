@@ -9,7 +9,6 @@ import Modelo.Conexion;
 import Persistencia.entidadData;
 import java.util.ArrayList;
 import spaentrededos.Cliente;
-
 /**
  *
  * @author carri
@@ -21,7 +20,7 @@ public class Test {
      */
     public static void main(String[] args) {
        Conexion conexion = new Conexion () ; 
-       entidadData entidadData = new entidadData (conexion ) ; 
+       final entidadData entidadData = new entidadData (conexion ) ; 
        Cliente a =new Cliente(1,44738237,"Castro Maximiliano",26601927,20,"Ninguna", true);
        entidadData.guardarCliente(a);
        Cliente b =new Cliente(2,40238734,"Barros Edgardo",26632763,26,"Ninguna", true);
@@ -32,7 +31,20 @@ public class Test {
        entidadData.guardarCliente(d);
        Cliente e =new Cliente(5,42293843,"Fernandez Rodrigo",26635233,24,"Ninguna", true);
        entidadData.guardarCliente(e);
+       entidadData.guardarCliente(a);
+       entidadData.guardarCliente(b);
+       entidadData.guardarCliente(c);
+       entidadData.guardarCliente(d);
        
+       java.awt.EventQueue.invokeLater(new Runnable() {
+           @Override
+           public void run() {
+           Menu menu = new Menu(entidadData);
+           menu.setVisible(true);
+           menu.setLocationRelativeTo(null);
+           }
+           });
+     
         ArrayList<Cliente> cli = new ArrayList();
        cli= entidadData.listarCliente();
        for (Cliente cliente : cli) {

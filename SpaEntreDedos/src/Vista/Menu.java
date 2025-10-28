@@ -5,11 +5,15 @@
  */
 package Vista;
 
+import Persistencia.entidadData;
+
 /**
  *
  * @author User
  */
 public class Menu extends javax.swing.JFrame {
+
+    private entidadData entidadData;
 
     /**
      * Creates new form Menu
@@ -17,7 +21,10 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
     }
-
+public Menu(entidadData entidadData){
+    initComponents();
+    this.entidadData = entidadData;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +34,127 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelGestionClientes = new javax.swing.JLabel();
+        jButtonRegistrarCliente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButtonBuscarCliente = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButtonActualizarCliente = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jButtonEliminarCliente = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabelGestionClientes.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        jLabelGestionClientes.setText("Gestion de clientes");
+
+        jButtonRegistrarCliente.setText("Registrar");
+
+        jLabel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabel1.setText("Cliente:");
+
+        jLabel2.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabel2.setText("Buscar cliente:");
+
+        jButtonBuscarCliente.setText("Buscar");
+        jButtonBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabel3.setText("Actualizar cliente:");
+
+        jButtonActualizarCliente.setText("Actualizar");
+        jButtonActualizarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarClienteActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabel4.setText("Eliminar cliente:");
+
+        jButtonEliminarCliente.setText("Eliminar");
+
+        jButton1.setText("Salir");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelGestionClientes)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(103, 103, 103))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonBuscarCliente)
+                                    .addComponent(jButtonRegistrarCliente))))
+                        .addGap(170, 170, 170))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4))
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonEliminarCliente)
+                                    .addComponent(jButtonActualizarCliente)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabelGestionClientes)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRegistrarCliente)
+                    .addComponent(jLabel1))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonBuscarCliente)
+                    .addComponent(jLabel2))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jButtonActualizarCliente))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jButtonEliminarCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBuscarClienteActionPerformed
+
+    private void jButtonActualizarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonActualizarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +192,15 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonActualizarCliente;
+    private javax.swing.JButton jButtonBuscarCliente;
+    private javax.swing.JButton jButtonEliminarCliente;
+    private javax.swing.JButton jButtonRegistrarCliente;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelGestionClientes;
     // End of variables declaration//GEN-END:variables
 }
