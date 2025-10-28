@@ -130,12 +130,12 @@ public class SesionData {
         return sesiones;
     }
 
-    public List<Sesion> listarSesionesPorMasajista(int matriculaMasajista) {
+    public List<Sesion> listarSesionesPorMasajista(int matricula) {
         List<Sesion> sesiones = new ArrayList<>();
         String sql = "SELECT * FROM sesion WHERE matricula = ?";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, matriculaMasajista);
+            ps.setInt(1, matricula);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Sesion s = new Sesion();
@@ -148,7 +148,7 @@ public class SesionData {
                 Dia_De_SpaData dd = new Dia_De_SpaData();
 
                 s.setConsultorio(cd.buscarConsultorioPorId(rs.getInt("nroConsultorio")));
-                s.setMasajista(new MasajistaData().buscarMasajistaPorId(matriculaMasajista));
+                s.setMasajista(new MasajistaData().buscarMasajistaPorId(matricula));
                 s.setDiaDeSpa(dd.buscarDiaSpaPorId(rs.getInt("codPack")));
                 s.setEstado(rs.getBoolean("estado"));
 
