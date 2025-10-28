@@ -31,7 +31,7 @@ public class SesionData {
     }
 
     public void guardarSesion(Sesion s) {
-        String sql = "INSERR INTO sesion (fechaHoraInicio, fechaHoraFin, tratamiento, nroConsultorio, matriculaMasajista, codPack, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERR INTO sesion (fechaHoraInicio, fechaHoraFin, tratamiento, nroConsultorio, matricula, codPack, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setTimestamp(1, Timestamp.valueOf(s.getFechaHoraInicio()));
@@ -56,7 +56,7 @@ public class SesionData {
     }
 
     public void modificarSesion(Sesion s) {
-        String sql = "UPDATE sesion SET fechaHoraInicio=?, fechaHoraFin=?, tratamiento=?, nroConsultorio=?, matriculaMasajista=?, codPack=?, estado=? WHERE codSesion=?";
+        String sql = "UPDATE sesion SET fechaHoraInicio=?, fechaHoraFin=?, tratamiento=?, nroConsultorio=?, matricula=?, codPack=?, estado=? WHERE codSesion=?";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setTimestamp(1, Timestamp.valueOf(s.getFechaHoraInicio()));
@@ -97,7 +97,7 @@ public class SesionData {
         }
     }
 
-    String sql = "UPDATE sesion SET estado = 0 WHERE codSesion = ?";
+  
 
     public List<Sesion> listarSesiones() {
         List<Sesion> sesiones = new ArrayList<>();
@@ -117,7 +117,7 @@ public class SesionData {
                 Dia_De_SpaData dd = new Dia_De_SpaData();
 
                 s.setConsultorio(cd.buscarConsultorioPorId(rs.getInt("nroConsultorio")));
-                s.setMasajista(md.buscarMasajistaPorId(rs.getInt("matriculaMasajista")));
+                s.setMasajista(md.buscarMasajistaPorId(rs.getInt("matricula")));
                 s.setDiaDeSpa(dd.buscarDiaSpaPorId(rs.getInt("codPack")));
                 s.setEstado(rs.getBoolean("estado"));
 
@@ -132,7 +132,7 @@ public class SesionData {
 
     public List<Sesion> listarSesionesPorMasajista(int matriculaMasajista) {
         List<Sesion> sesiones = new ArrayList<>();
-        String sql = "SELECT * FROM sesion WHERE matriculaMasajista = ?";
+        String sql = "SELECT * FROM sesion WHERE matricula = ?";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, matriculaMasajista);
