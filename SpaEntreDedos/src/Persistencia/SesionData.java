@@ -117,7 +117,7 @@ public class SesionData {
                 Dia_De_SpaData dd = new Dia_De_SpaData();
 
                 s.setConsultorio(cd.buscarConsultorioPorId(rs.getInt("nroConsultorio")));
-                s.setMasajista(md.buscarMasajistaPorId(rs.getInt("matricula")));
+                s.setMasajista(md.buscarPorMatricula(rs.getInt("matricula")));
                 s.setDiaDeSpa(dd.buscarDiaSpaPorId(rs.getInt("codPack")));
                 s.setEstado(rs.getBoolean("estado"));
 
@@ -148,7 +148,7 @@ public class SesionData {
                 Dia_De_SpaData dd = new Dia_De_SpaData();
 
                 s.setConsultorio(cd.buscarConsultorioPorId(rs.getInt("nroConsultorio")));
-                s.setMasajista(new MasajistaData().buscarMasajistaPorId(matricula));
+                s.setMasajista(new MasajistaData().buscarPorMatricula(matricula));
                 s.setDiaDeSpa(dd.buscarDiaSpaPorId(rs.getInt("codPack")));
                 s.setEstado(rs.getBoolean("estado"));
 
