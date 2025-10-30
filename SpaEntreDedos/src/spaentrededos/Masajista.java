@@ -8,6 +8,9 @@ public class Masajista {
     private String especialidad;
     private boolean estado;
 
+    public Masajista() {
+    }
+    
     public Masajista(int matricula, String nombreApellido, int telefono, String especialidad, boolean estado) {
         this.matricula = matricula;
         this.nombreApellido = nombreApellido;

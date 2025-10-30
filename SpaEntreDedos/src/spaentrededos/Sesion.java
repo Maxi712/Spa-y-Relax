@@ -15,6 +15,9 @@ public class Sesion {
     private Dia_De_Spa diaDeSpa;
     private boolean estado;
 
+    public Sesion() {
+    }
+
     public Sesion(int codSesion, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFin, String tratamiento, Consultorio consultorio, Masajista masajista, List<Instalacion> instalacion, Dia_De_Spa diaDeSpa, boolean estado) {
         this.codSesion = codSesion;
         this.fechaHoraInicio = fechaHoraInicio;
