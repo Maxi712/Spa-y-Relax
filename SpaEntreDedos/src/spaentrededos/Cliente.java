@@ -78,6 +78,11 @@ public class Cliente {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente = " + "codCli: " + codCli + ", dni: " + dni + ", nombreCompleto: " + nombreCompleto + ", telefono: " + telefono + ", edad: " + edad + ", afecciones: " + afecciones + ", estado: " + estado + '.';
+    }
     
     
 }

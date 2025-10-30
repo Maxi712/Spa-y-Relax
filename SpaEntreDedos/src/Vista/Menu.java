@@ -21,6 +21,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        cargarCliente();
     }
 public Menu(entidadData entidadData){
     initComponents();
@@ -41,20 +42,20 @@ public Menu(entidadData entidadData){
         jButtonActualizar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jTextFieldCodigo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldDNI = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldNombre = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextFieldTelefono = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextFieldEdad = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextFieldAfecciones = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextFieldEstado = new javax.swing.JTextField();
+        jLabelCodigo = new javax.swing.JLabel();
+        jTextFieldIngresarCodigo = new javax.swing.JTextField();
+        jLabelDNI = new javax.swing.JLabel();
+        jTextFieldIngresarDNI = new javax.swing.JTextField();
+        jLabelNombre = new javax.swing.JLabel();
+        jTextFieldIngresarNombre = new javax.swing.JTextField();
+        jLabelTelefono = new javax.swing.JLabel();
+        jTextFieldIngresarTelefono = new javax.swing.JTextField();
+        jLabelEdad = new javax.swing.JLabel();
+        jTextFieldIngresarEdad = new javax.swing.JTextField();
+        jLabelAfecciones = new javax.swing.JLabel();
+        jTextFieldIngresarAfecciones = new javax.swing.JTextField();
+        jLabelEstado = new javax.swing.JLabel();
+        jTextFieldIngresarEstado = new javax.swing.JTextField();
         jButtonAlta = new javax.swing.JButton();
         jButtonBaja = new javax.swing.JButton();
 
@@ -81,45 +82,51 @@ public Menu(entidadData entidadData){
 
         jButtonEliminar.setText("Eliminar");
 
-        jLabel5.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
-        jLabel5.setText("Codigo:");
-
-        jTextFieldCodigo.setEditable(false);
-        jTextFieldCodigo.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCodigoActionPerformed(evt);
+                jComboBox1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
-        jLabel1.setText("DNI:");
+        jLabelCodigo.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabelCodigo.setText("Codigo:");
 
-        jTextFieldDNI.setEditable(false);
+        jTextFieldIngresarCodigo.setEditable(false);
+        jTextFieldIngresarCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldIngresarCodigoActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
-        jLabel2.setText("Nombre completo:");
+        jLabelDNI.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabelDNI.setText("DNI:");
 
-        jTextFieldNombre.setEditable(false);
+        jTextFieldIngresarDNI.setEditable(false);
 
-        jLabel3.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
-        jLabel3.setText("Telefono:");
+        jLabelNombre.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabelNombre.setText("Nombre completo:");
 
-        jTextFieldTelefono.setEditable(false);
+        jTextFieldIngresarNombre.setEditable(false);
 
-        jLabel4.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
-        jLabel4.setText("Edad:");
+        jLabelTelefono.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabelTelefono.setText("Telefono:");
 
-        jTextFieldEdad.setEditable(false);
+        jTextFieldIngresarTelefono.setEditable(false);
 
-        jLabel6.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
-        jLabel6.setText("Afecciones:");
+        jLabelEdad.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabelEdad.setText("Edad:");
 
-        jTextFieldAfecciones.setEditable(false);
+        jTextFieldIngresarEdad.setEditable(false);
 
-        jLabel7.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
-        jLabel7.setText("Estado:");
+        jLabelAfecciones.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabelAfecciones.setText("Afecciones:");
 
-        jTextFieldEstado.setEditable(false);
+        jTextFieldIngresarAfecciones.setEditable(false);
+
+        jLabelEstado.setFont(new java.awt.Font("Arial Unicode MS", 1, 12)); // NOI18N
+        jLabelEstado.setText("Estado:");
+
+        jTextFieldIngresarEstado.setEditable(false);
 
         jButtonAlta.setText("Dar alta");
 
@@ -135,9 +142,9 @@ public Menu(entidadData entidadData){
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(jLabelEstado)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldIngresarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(197, 197, 197)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,27 +154,27 @@ public Menu(entidadData entidadData){
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabelAfecciones)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldIngresarAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
+                                        .addComponent(jLabelCodigo)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldIngresarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(58, 58, 58)
-                                        .addComponent(jLabel1)
+                                        .addComponent(jLabelDNI)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jTextFieldIngresarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
+                                        .addComponent(jLabelTelefono)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextFieldIngresarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(78, 78, 78)
-                                        .addComponent(jLabel4)))
+                                        .addComponent(jLabelEdad)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextFieldIngresarEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,9 +190,9 @@ public Menu(entidadData entidadData){
                                         .addGap(18, 18, 18)
                                         .addComponent(jButtonAlta))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jLabelNombre)
                                 .addGap(16, 16, 16)
-                                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextFieldIngresarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(344, 344, 344))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,29 +213,29 @@ public Menu(entidadData entidadData){
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelCodigo)
+                    .addComponent(jTextFieldIngresarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDNI)
+                    .addComponent(jTextFieldIngresarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNombre)
+                    .addComponent(jTextFieldIngresarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextFieldEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldIngresarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelEdad)
+                        .addComponent(jTextFieldIngresarEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelAfecciones)
+                    .addComponent(jTextFieldIngresarAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextFieldEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelEstado)
+                    .addComponent(jTextFieldIngresarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsertar)
@@ -253,9 +260,21 @@ public Menu(entidadData entidadData){
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
-    private void jTextFieldCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCodigoActionPerformed
+    private void jTextFieldIngresarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIngresarCodigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCodigoActionPerformed
+    }//GEN-LAST:event_jTextFieldIngresarCodigoActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        Cliente cliente = (Cliente)jComboBox1.getSelectedItem();
+        jTextFieldIngresarCodigo.setText(cliente.getCodCli()+"");
+        jTextFieldIngresarDNI.setText(cliente.getDni()+"");
+        jTextFieldIngresarNombre.setText(cliente.getNombreCompleto());
+        jTextFieldIngresarTelefono.setText(cliente.getTelefono()+"");
+        jTextFieldIngresarEdad.setText(cliente.getEdad()+"");
+        jTextFieldIngresarAfecciones.setText(cliente.getAfecciones());
+        jTextFieldIngresarEstado.setText(cliente.isEstado()+"");
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -300,20 +319,27 @@ public Menu(entidadData entidadData){
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonInsertar;
     private javax.swing.JComboBox<Cliente> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelAfecciones;
+    private javax.swing.JLabel jLabelCodigo;
+    private javax.swing.JLabel jLabelDNI;
+    private javax.swing.JLabel jLabelEdad;
+    private javax.swing.JLabel jLabelEstado;
     private javax.swing.JLabel jLabelGestionClientes;
-    private javax.swing.JTextField jTextFieldAfecciones;
-    private javax.swing.JTextField jTextFieldCodigo;
-    private javax.swing.JTextField jTextFieldDNI;
-    private javax.swing.JTextField jTextFieldEdad;
-    private javax.swing.JTextField jTextFieldEstado;
-    private javax.swing.JTextField jTextFieldNombre;
-    private javax.swing.JTextField jTextFieldTelefono;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JTextField jTextFieldIngresarAfecciones;
+    private javax.swing.JTextField jTextFieldIngresarCodigo;
+    private javax.swing.JTextField jTextFieldIngresarDNI;
+    private javax.swing.JTextField jTextFieldIngresarEdad;
+    private javax.swing.JTextField jTextFieldIngresarEstado;
+    private javax.swing.JTextField jTextFieldIngresarNombre;
+    private javax.swing.JTextField jTextFieldIngresarTelefono;
     // End of variables declaration//GEN-END:variables
+private void cargarCliente(){
+    jComboBox1.addItem(new Cliente(1,44738237,"Castro Maximiliano",26601927,20,"Ninguna", true));
+    jComboBox1.addItem(new Cliente(2,40238734,"Barros Edgardo",26632763,26,"Ninguna", true));
+    jComboBox1.addItem(new Cliente(3,41934744,"Carrizo Anna",266387424,24,"Ninguna", true));
+    jComboBox1.addItem(new Cliente(4,40238274,"Gimenez Pablo",266372834,23,"Ninguna", true));
+    jComboBox1.addItem(new Cliente(5,42293843,"Fernandez Rodrigo",26635233,24,"Ninguna", true));
+}
 }
