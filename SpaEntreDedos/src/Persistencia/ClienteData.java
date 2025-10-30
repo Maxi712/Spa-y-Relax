@@ -65,9 +65,8 @@ public class ClienteData {
             ps.setInt(4, c.getEdad());
             ps.setString(5, c.getAfecciones());
             ps.setBoolean(6, c.isEstado());
-              ps.setInt(7, c.getCodCli());
+            ps.setInt(7, c.getCodCli());
 
-           
             // Obtener el ID generado automáticamente
             int exito = ps.executeUpdate();
             if (exito == 1) {

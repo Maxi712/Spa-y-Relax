@@ -30,6 +30,10 @@ public class Sesion {
         this.estado = estado;
     }
 
+    public Sesion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getCodSesion() {
         return codSesion;
     }

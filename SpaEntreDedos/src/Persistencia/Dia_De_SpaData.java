@@ -5,10 +5,16 @@
  */
 package Persistencia;
 
+import spaentrededos.Dia_De_Spa;
+
 /**
  *
  * @author carri
  */
 class Dia_De_SpaData {
+
+    Dia_De_Spa buscarDiaSpaPorId(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

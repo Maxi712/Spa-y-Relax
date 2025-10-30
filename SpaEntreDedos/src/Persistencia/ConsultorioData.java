@@ -5,10 +5,16 @@
  */
 package Persistencia;
 
+import spaentrededos.Consultorio;
+
 /**
  *
  * @author carri
  */
 class ConsultorioData {
+
+    Consultorio buscarConsultorioPorId(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
