@@ -31,7 +31,7 @@ public class SesionData {
     }
 
     public void guardarSesion(Sesion s) {
-        String sql = "INSERR INTO sesion (fechaHoraInicio, fechaHoraFin, tratamiento, nroConsultorio, matricula, codPack, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO sesion (fechaHoraInicio, fechaHoraFin, tratamiento, nroConsultorio, matricula, codPack, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setTimestamp(1, Timestamp.valueOf(s.getFechaHoraInicio()));
