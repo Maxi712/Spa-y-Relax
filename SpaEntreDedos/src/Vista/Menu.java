@@ -6,6 +6,7 @@
 package Vista;
 
 import Persistencia.entidadData;
+import javax.swing.JOptionPane;
 import spaentrededos.Cliente;
 
 /**
@@ -177,114 +178,111 @@ public Menu(entidadData entidadData){
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabelEstado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldIngresarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(197, 197, 197)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonBaja)
-                                    .addComponent(jButtonActualizar))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelAfecciones)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldIngresarAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(jLabelCodigo)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldIngresarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(58, 58, 58)
-                                        .addComponent(jLabelDNI)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldIngresarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabelTelefono)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldIngresarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(78, 78, 78)
-                                        .addComponent(jLabelEdad)))
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextFieldIngresarEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelAfecciones)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldIngresarAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabelCodigo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldIngresarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelDNI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldIngresarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(197, 197, 197)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonBaja)
+                            .addComponent(jButtonActualizar))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelNombre)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonInsertar)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonBuscar))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButtonEliminar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButtonAlta))))
+                                        .addComponent(jButtonAlta))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(jLabelEdad)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextFieldIngresarEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(61, 61, 61)
+                                            .addComponent(jLabelEstado)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jTextFieldIngresarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jButtonInsertar)
+                                            .addGap(18, 18, 18)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jButtonBuscar)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabelTelefono)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jTextFieldIngresarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGap(57, 57, 57))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelNombre)
-                                .addGap(16, 16, 16)
-                                .addComponent(jTextFieldIngresarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(344, 344, 344))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldIngresarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabelGestionClientes)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelGestionClientes)
+                        .addGap(93, 93, 93)))
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabelGestionClientes))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(37, 37, 37)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelGestionClientes)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCodigo)
                     .addComponent(jTextFieldIngresarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDNI)
                     .addComponent(jTextFieldIngresarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNombre)
-                    .addComponent(jTextFieldIngresarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTelefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldIngresarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelEdad)
-                        .addComponent(jTextFieldIngresarEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
+                    .addComponent(jTextFieldIngresarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTelefono)
+                    .addComponent(jTextFieldIngresarTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAfecciones)
-                    .addComponent(jTextFieldIngresarAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldIngresarAfecciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldIngresarEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEdad)
                     .addComponent(jLabelEstado)
                     .addComponent(jTextFieldIngresarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsertar)
                     .addComponent(jButtonBuscar)
@@ -299,9 +297,48 @@ public Menu(entidadData entidadData){
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void jButtonInsertarActionPerfomed(java.awt.event.ActionEvent evt){
+    try{
+        String nombre = jTextFieldIngresarNombre.getText();
+        String dni = jTextFieldIngresarDNI.getText();
+        String telefono = jTextFieldIngresarTelefono.getText();
+        int edad = Integer.parseInt(jTextFieldIngresarEdad.getText());
+        boolean estado = true;
+        Cliente nuevoCliente = new Cliente(0, edad, dni, telefono, nombre, "Ninguna", estado);
+        entidadData.guardarCliente(nuevoCliente);
+        JOptionPane.showMessageDialog(this, "Cliente insertado con exito.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        limpiarCampos();
+        cargarClientesEnComboBox();
+    } catch(NumberFormatException e){
+        JOptionPane.showMessageDialog(this, "Error en el formato de datos(Edad debe ser un numero).", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch(Exception e){
+        JOptionPane.showMessageDialog(this, "Error al insertar el cliente: " +e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+    
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
+        try{
+            String codigoTexto = jTextFieldIngresarCodigo.getText();
+            if(codigoTexto.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Debe buscar o seleccionar un cliente primero(el campo de codigo debe estar lleno).", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        int codigo = Integer.parseInt(codigoTexto);
+        int dni = Integer.parseInt(jTextFieldIngresarDNI.getText());
+        String nombre = jTextFieldIngresarNombre.getText();
+        int telefono = Integer.parseInt(jTextFieldIngresarTelefono.getText());
+        int edad = Integer.parseInt(jTextFieldIngresarEdad.getText());
+        String afecciones = jTextFieldIngresarAfecciones.getText();
+        boolean estado = Boolean.parseBoolean(jTextFieldIngresarEstado.getText());
+        Cliente clienteActualizado = new Cliente(codigo, dni, nombre, telefono, edad, afecciones, estado);
+        entidadData.actualizarCliente(clienteActualizado);
+        JOptionPane.showMessageDialog(this, "Cliente actualizado con exito.", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error en el formato de datos: DNI, Codigo, Telefono o Edad deben ser numeros." +e.getMessage(), "Error de formato.", JOptionPane.ERROR_MESSAGE);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al actualizar el cliente: " +e.getMessage(), "Error de actualizacion.", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
@@ -310,18 +347,37 @@ public Menu(entidadData entidadData){
 
     private void jTextFieldIngresarCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIngresarCodigoActionPerformed
         // TODO add your handling code here:
+        try{
+            String codigoTexto = jTextFieldIngresarCodigo.getText();
+            if(!codigoTexto.isEmpty()){
+                int idCliente = Integer.parseInt(codigoTexto);
+                Cliente clienteEncontrado = entidadData.buscarCliente(idCliente);
+                if(clienteEncontrado != null){
+                    jTextFieldIngresarDNI.setText(String.valueOf(clienteEncontrado.getDni()));
+                    JOptionPane.showMessageDialog(this, "Cliente encontrado por codigo.", "Busqueda", JOptionPane.INFORMATION_MESSAGE);
+                } else{
+                    JOptionPane.showMessageDialog(this, "Cliente con codigo " +idCliente+ " no encontrado.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "El codigo debe ser un numero entero valido.", "Error de formato", JOptionPane.ERROR_MESSAGE);
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error al buscar el cliente por codigo: " +e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jTextFieldIngresarCodigoActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        if(jComboBox1.getSelectedItem() != null){
         Cliente cliente = (Cliente)jComboBox1.getSelectedItem();
-        jTextFieldIngresarCodigo.setText(cliente.getCodCli()+"");
-        jTextFieldIngresarDNI.setText(cliente.getDni()+"");
+        jTextFieldIngresarCodigo.setText(String.valueOf(cliente.getCodCli()));
+        jTextFieldIngresarDNI.setText(String.valueOf(cliente.getDni()));
         jTextFieldIngresarNombre.setText(cliente.getNombreCompleto());
-        jTextFieldIngresarTelefono.setText(cliente.getTelefono()+"");
-        jTextFieldIngresarEdad.setText(cliente.getEdad()+"");
+        jTextFieldIngresarTelefono.setText(String.valueOf(cliente.getTelefono()));
+        jTextFieldIngresarEdad.setText(String.valueOf(cliente.getEdad()));
         jTextFieldIngresarAfecciones.setText(cliente.getAfecciones());
-        jTextFieldIngresarEstado.setText(cliente.isEstado()+"");
+        jTextFieldIngresarEstado.setText(String.valueOf(cliente.isEstado()));
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
@@ -395,4 +451,12 @@ private void cargarCliente(){
     jComboBox1.addItem(new Cliente(4,40238274,"Gimenez Pablo",266372834,23,"Ninguna", true));
     jComboBox1.addItem(new Cliente(5,42293843,"Fernandez Rodrigo",26635233,24,"Ninguna", true));
 }
+
+    private void limpiarCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void cargarClientesEnComboBox() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

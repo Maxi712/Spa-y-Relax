@@ -23,6 +23,10 @@ public class Cliente {
         this.estado = estado;
     }
 
+    public Cliente(int i, int edad, String dni, String telefono, String nombre, String ninguna, boolean estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getCodCli() {
         return codCli;
     }
