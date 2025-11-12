@@ -5,13 +5,19 @@
  */
 package Vista;
 
+import Persistencia.ClienteData;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import spaentrededos.Cliente;
 
 /**
  *
@@ -25,6 +31,8 @@ public class CargarCliente extends javax.swing.JInternalFrame {
             return false;
         }
     };
+     
+     ClienteData cd = new ClienteData();
     /**
      * Creates new form CargarCliente
      */
@@ -37,6 +45,7 @@ public class CargarCliente extends javax.swing.JInternalFrame {
         cambiarTextField(this.jTFEdad);
         cambiarTextField(this.jTFAfecciones);
         armarCabecera();
+        cargarDatosTabla();
     }
 
     /**
@@ -103,28 +112,69 @@ public class CargarCliente extends javax.swing.JInternalFrame {
         jLCodigo.setForeground(new java.awt.Color(53, 94, 59));
         jLCodigo.setText("Codigo:");
 
+        jTFCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFCodigoKeyReleased(evt);
+            }
+        });
+
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LUPAX16.png"))); // NOI18N
         jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jLDocumento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLDocumento.setForeground(new java.awt.Color(53, 94, 59));
         jLDocumento.setText("Documento:");
 
+        jTFDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFDocumentoKeyReleased(evt);
+            }
+        });
+
         jLNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(53, 94, 59));
         jLNombre.setText("Nombre y Apellido:");
+
+        jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFNombreKeyReleased(evt);
+            }
+        });
 
         jLTelefono.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLTelefono.setForeground(new java.awt.Color(53, 94, 59));
         jLTelefono.setText("Telefono:");
 
+        jTFTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFTelefonoKeyReleased(evt);
+            }
+        });
+
         jLEdad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLEdad.setForeground(new java.awt.Color(53, 94, 59));
         jLEdad.setText("Edad:");
 
+        jTFEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFEdadKeyReleased(evt);
+            }
+        });
+
         jLAfecciones.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLAfecciones.setForeground(new java.awt.Color(53, 94, 59));
         jLAfecciones.setText("Afecciones:");
+
+        jTFAfecciones.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFAfeccionesKeyReleased(evt);
+            }
+        });
 
         jLEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLEstado.setForeground(new java.awt.Color(53, 94, 59));
@@ -134,12 +184,27 @@ public class CargarCliente extends javax.swing.JInternalFrame {
 
         jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/17.png"))); // NOI18N
         jBAgregar.setToolTipText("Agregar Cliente");
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarActionPerformed(evt);
+            }
+        });
 
         jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/18.png"))); // NOI18N
         jBModificar.setToolTipText("Modificar Cliente");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/19.png"))); // NOI18N
         jBEliminar.setToolTipText("Eliminar Cliente");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jTCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -282,6 +347,164 @@ public class CargarCliente extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jTFCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[0-9_.]+");
+        String nro = this.jTFCodigo.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es un numero");
+            this.jTFCodigo.setText(nro.substring(0, nro.length() - 1));
+            this.jTFCodigo.requestFocus();
+        }
+    }//GEN-LAST:event_jTFCodigoKeyReleased
+
+    private void jTFDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDocumentoKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[0-9_.]+");
+        String nro = this.jTFDocumento.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es un numero");
+            this.jTFDocumento.setText(nro.substring(0, nro.length() - 1));
+            this.jTFDocumento.requestFocus();
+        }
+    }//GEN-LAST:event_jTFDocumentoKeyReleased
+
+    private void jTFTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelefonoKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[0-9_.]+");
+        String nro = this.jTFTelefono.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es un numero");
+            this.jTFTelefono.setText(nro.substring(0, nro.length() - 1));
+            this.jTFTelefono.requestFocus();
+        }
+    }//GEN-LAST:event_jTFTelefonoKeyReleased
+
+    private void jTFEdadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEdadKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[0-9_.]+");
+        String nro = this.jTFEdad.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es un numero");
+            this.jTFEdad.setText(nro.substring(0, nro.length() - 1));
+            this.jTFEdad.requestFocus();
+        }
+    }//GEN-LAST:event_jTFEdadKeyReleased
+
+    private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
+        String nro = this.jTFNombre.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es una letra");
+            this.jTFNombre.setText(nro.substring(0, nro.length() - 1));
+            this.jTFNombre.requestFocus();
+        }
+    }//GEN-LAST:event_jTFNombreKeyReleased
+
+    private void jTFAfeccionesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFAfeccionesKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
+        String nro = this.jTFAfecciones.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es una letra");
+            this.jTFAfecciones.setText(nro.substring(0, nro.length() - 1));
+            this.jTFAfecciones.requestFocus();
+        }
+    }//GEN-LAST:event_jTFAfeccionesKeyReleased
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (!this.jTFCodigo.getText().isEmpty()) {
+                ArrayList<Cliente>cliente = cd.listarClientes();
+                for (Cliente c : cliente) {
+                    if (c.getCodCli() == Integer.parseInt(this.jTFCodigo.getText())) {
+                        this.jTFCodigo.setText(Integer.toString(c.getCodCli()));
+                        this.jTFDocumento.setText(Integer.toString(c.getDni()));
+                        this.jTFNombre.setText(c.getNombreCompleto());
+                        this.jTFTelefono.setText(Integer.toString(c.getTelefono()));
+                        this.jTFEdad.setText(Integer.toString(c.getEdad()));
+                        this.jTFAfecciones.setText(c.getAfecciones());
+                        this.jRBEstado.setSelected(c.isEstado());
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "El campo Codigo esta vacio");
+            }
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (!this.jTFDocumento.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() && !this.jTFTelefono.getText().isEmpty() && !this.jTFEdad.getText().isEmpty() && !this.jTFAfecciones.getText().isEmpty()) {
+                int documento = Integer.parseInt(this.jTFDocumento.getText());
+                String nombre = this.jTFNombre.getText();
+                int telefono = Integer.parseInt(this.jTFTelefono.getText());
+                int edad = Integer.parseInt(this.jTFEdad.getText());
+                String afecciones = this.jTFAfecciones.getText();
+                boolean estado = this.jRBEstado.isSelected();
+                Cliente cliente = new Cliente(documento,  nombre,  telefono,  edad, afecciones, estado);
+                cd.guardarCliente(cliente);
+            }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            cargarDatosTabla();
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBAgregarActionPerformed
+
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (!this.jTFDocumento.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() && !this.jTFTelefono.getText().isEmpty() && !this.jTFEdad.getText().isEmpty() && !this.jTFAfecciones.getText().isEmpty()) {
+                int codigo = Integer.parseInt(this.jTFCodigo.getText());
+                int documento = Integer.parseInt(this.jTFDocumento.getText());
+                String nombre = this.jTFNombre.getText();
+                int telefono = Integer.parseInt(this.jTFTelefono.getText());
+                int edad = Integer.parseInt(this.jTFEdad.getText());
+                String afecciones = this.jTFAfecciones.getText();
+                boolean estado = this.jRBEstado.isSelected();
+                Cliente cliente = new Cliente(codigo, documento,  nombre,  telefono,  edad, afecciones, estado);
+                cd.modificarCliente(cliente);
+            }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            cargarDatosTabla();
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        // TODO add your handling code here:
+        try{
+            if(!this.jTFCodigo.getText().isEmpty()){
+                int codigo = Integer.parseInt(this.jTFCodigo.getText());
+                cd.eliminarCliente(codigo);
+            }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            cargarDatosTabla();
+        }catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
@@ -330,5 +553,26 @@ private void cambiarTextField(JTextField campo) {
         modelo.addColumn("Afecciones");
         modelo.addColumn("Estado");
         jTCliente.setModel(modelo);
+    }
+    
+    private void limpiarCampos() {
+        this.jTFCodigo.setText("");
+        this.jTFDocumento.setText("");
+        this.jTFNombre.setText("");
+        this.jTFTelefono.setText("");
+        this.jTFEdad.setText("");
+        this.jTFAfecciones.setText("");
+        this.jRBEstado.setSelected(false);
+    }
+    
+    private void cargarDatosTabla(){
+        ArrayList<Cliente> cliente = cd.listarClientes();
+        for(Cliente c : cliente){
+            if(c.isEstado()== true){
+                modelo.addRow(new Object[]{c.getCodCli(),c.getDni(), c.getNombreCompleto(), c.getTelefono(), c.getEdad(), c.getAfecciones(), "Activo"});
+            }else{
+                modelo.addRow(new Object[]{c.getCodCli(),c.getDni(), c.getNombreCompleto(), c.getTelefono(), c.getEdad(), c.getAfecciones(), "Inactivo"});
+            }
+        }
     }
 }

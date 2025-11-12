@@ -9,8 +9,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -107,6 +110,12 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jLCodigo.setForeground(new java.awt.Color(53, 94, 59));
         jLCodigo.setText("Codigo:");
 
+        jTFCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFCodigoKeyReleased(evt);
+            }
+        });
+
         jBBuscar.setBackground(new java.awt.Color(249, 246, 238));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LUPAX16.png"))); // NOI18N
         jBBuscar.setText("Buscar");
@@ -115,9 +124,21 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jLNombre.setForeground(new java.awt.Color(53, 94, 59));
         jLNombre.setText("Nombre:");
 
+        jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFNombreKeyReleased(evt);
+            }
+        });
+
         jLPrecio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLPrecio.setForeground(new java.awt.Color(53, 94, 59));
         jLPrecio.setText("Precio:");
+
+        jTFPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFPrecioKeyReleased(evt);
+            }
+        });
 
         jLDetalle.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLDetalle.setForeground(new java.awt.Color(53, 94, 59));
@@ -163,7 +184,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jPPrincipal.setLayout(jPPrincipalLayout);
         jPPrincipalLayout.setHorizontalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 512, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +288,42 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jTFCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[0-9_.]+");
+        String nro = this.jTFCodigo.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es un numero");
+            this.jTFCodigo.setText(nro.substring(0, nro.length() - 1));
+            this.jTFCodigo.requestFocus();
+        }
+    }//GEN-LAST:event_jTFCodigoKeyReleased
+
+    private void jTFPrecioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFPrecioKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[0-9_.]+");
+        String nro = this.jTFPrecio.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es un numero");
+            this.jTFPrecio.setText(nro.substring(0, nro.length() - 1));
+            this.jTFPrecio.requestFocus();
+        }
+    }//GEN-LAST:event_jTFPrecioKeyReleased
+
+    private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
+        String nro = this.jTFNombre.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es una letra");
+            this.jTFNombre.setText(nro.substring(0, nro.length() - 1));
+            this.jTFNombre.requestFocus();
+        }
+    }//GEN-LAST:event_jTFNombreKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

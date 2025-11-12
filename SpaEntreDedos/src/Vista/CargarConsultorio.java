@@ -9,8 +9,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -38,7 +41,7 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
     public CargarConsultorio() {
         initComponents();
         cambiarTextField(this.jTFNumero);
-        cambiarTextField(this.jTFNombre);
+        cambiarTextField(this.jTFUsos);
         cambiarTextField(this.jTFEquipamiento);
         armarCabecera();
     }
@@ -58,8 +61,8 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
         jLNumero = new javax.swing.JLabel();
         jTFNumero = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
-        jLNombre = new javax.swing.JLabel();
-        jTFNombre = new javax.swing.JTextField();
+        jLUsos = new javax.swing.JLabel();
+        jTFUsos = new javax.swing.JTextField();
         jTFEquipamiento = new javax.swing.JTextField();
         jLEspecialidad = new javax.swing.JLabel();
         jLApto = new javax.swing.JLabel();
@@ -102,13 +105,25 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
         jLNumero.setForeground(new java.awt.Color(53, 94, 59));
         jLNumero.setText("Numero:");
 
+        jTFNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFNumeroKeyReleased(evt);
+            }
+        });
+
         jBBuscar.setBackground(new java.awt.Color(249, 246, 238));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LUPAX16.png"))); // NOI18N
         jBBuscar.setText("Buscar");
 
-        jLNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLNombre.setForeground(new java.awt.Color(53, 94, 59));
-        jLNombre.setText("Usos:");
+        jLUsos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLUsos.setForeground(new java.awt.Color(53, 94, 59));
+        jLUsos.setText("Usos:");
+
+        jTFUsos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFUsosKeyReleased(evt);
+            }
+        });
 
         jLEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLEspecialidad.setForeground(new java.awt.Color(53, 94, 59));
@@ -162,13 +177,13 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
                         .addComponent(jLApto)
                         .addGap(18, 18, 18)
                         .addComponent(jRBApto))
-                    .addComponent(jLNombre)
+                    .addComponent(jLUsos)
                     .addGroup(jPPrincipalLayout.createSequentialGroup()
                         .addComponent(jLEspecialidad)
                         .addGap(18, 18, 18)
                         .addComponent(jTFEquipamiento))
                     .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTFUsos, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createSequentialGroup()
                             .addComponent(jLNumero)
                             .addGap(18, 18, 18)
@@ -204,8 +219,8 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
                             .addComponent(jBBuscar))
                         .addGap(18, 18, 18)
                         .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLNombre)
-                            .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLUsos)
+                            .addComponent(jTFUsos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLEspecialidad)
@@ -249,6 +264,30 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jTFNumeroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNumeroKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[0-9_.]+");
+        String nro = this.jTFNumero.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es un numero");
+            this.jTFNumero.setText(nro.substring(0, nro.length() - 1));
+            this.jTFNumero.requestFocus();
+        }
+    }//GEN-LAST:event_jTFNumeroKeyReleased
+
+    private void jTFUsosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsosKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
+        String nro = this.jTFUsos.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es una letra");
+            this.jTFUsos.setText(nro.substring(0, nro.length() - 1));
+            this.jTFUsos.requestFocus();
+        }
+    }//GEN-LAST:event_jTFUsosKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
@@ -258,9 +297,9 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLApto;
     private javax.swing.JLabel jLEspecialidad;
-    private javax.swing.JLabel jLNombre;
     private javax.swing.JLabel jLNumero;
     private javax.swing.JLabel jLTitulo;
+    private javax.swing.JLabel jLUsos;
     private javax.swing.JPanel jPPrincipal;
     private javax.swing.JPanel jPTitulo;
     private javax.swing.JRadioButton jRBApto;
@@ -268,8 +307,8 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTConsultorio;
     private javax.swing.JTextField jTFEquipamiento;
-    private javax.swing.JTextField jTFNombre;
     private javax.swing.JTextField jTFNumero;
+    private javax.swing.JTextField jTFUsos;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarTextField(JTextField campo) {

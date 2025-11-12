@@ -98,9 +98,9 @@ public class ClienteData {
         }
     }
 
-    public List<Cliente> listarClientes() {
-        List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente WHERE estado = 1"; // solo activos
+    public ArrayList<Cliente> listarClientes() {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT * FROM cliente"; // solo activos
         try {
             PreparedStatement ps = conexion.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
