@@ -380,7 +380,7 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         campo.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, borde)); // línea inferior
         campo.setBackground(new Color(0, 0, 0, 0)); // fondo transparente
         campo.setOpaque(false); // asegura transparencia
-        campo.setFont(new Font("SansSerif", jTFDetalle 14));
+        campo.setFont(new Font("SansSerif", Font.PLAIN, 14));
         campo.setForeground(Color.DARK_GRAY);
         campo.setCaretColor(Color.GRAY); // color del curso
     }
