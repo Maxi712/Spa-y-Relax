@@ -34,7 +34,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    private String[] especialidaes = {"Facial", "Corporal", "Relajacion", "Estetico"};
+    private String[] nombre = {"Baño Turco", "Ducha", "Hidromasaje", "Jacuzzi", "Piscina", "Sauna", "Zona Relax"};
 
     /**
      * Creates new form CargaMasajista
@@ -42,10 +42,10 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
     public CargarInstalaciones() {
         initComponents();
         cambiarTextField(this.jTFCodigo);
-        cambiarTextField(this.jTFNombre);
+        cambiarTextField(this.jTFDetalle);
         cambiarTextField(this.jTFPrecio);
-        estiloComboBox(this.jCBEspecialidad);
-        cargarCombo(this.jCBEspecialidad);
+        estiloComboBox(this.jCBNombre);
+        cargarCombo(this.jCBNombre);
         armarCabecera();
     }
 
@@ -65,7 +65,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jTFCodigo = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
         jLNombre = new javax.swing.JLabel();
-        jTFNombre = new javax.swing.JTextField();
+        jTFDetalle = new javax.swing.JTextField();
         jLPrecio = new javax.swing.JLabel();
         jTFPrecio = new javax.swing.JTextField();
         jLDetalle = new javax.swing.JLabel();
@@ -78,7 +78,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTinstalacion = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
-        jCBEspecialidad = new javax.swing.JComboBox<>();
+        jCBNombre = new javax.swing.JComboBox<>();
 
         jPPrincipal.setBackground(new java.awt.Color(249, 246, 238));
 
@@ -124,9 +124,9 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jLNombre.setForeground(new java.awt.Color(53, 94, 59));
         jLNombre.setText("Nombre:");
 
-        jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFDetalle.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFNombreKeyReleased(evt);
+                jTFDetalleKeyReleased(evt);
             }
         });
 
@@ -191,46 +191,51 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
                     .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPPrincipalLayout.createSequentialGroup()
-                            .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                            .addComponent(jLPrecio)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLEstado)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jRBEstado))
+                                        .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                            .addComponent(jLCodigo)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jBBuscar))
+                                        .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLNombre)
+                                                .addComponent(jLDetalle))
+                                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                                    .addGap(23, 23, 23)
+                                                    .addComponent(jCBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jTFDetalle)))))
+                                    .addGap(10, 10, 10))
+                                .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                    .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(18, 18, 18)
                             .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jBSalir)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29))
-            .addGroup(jPPrincipalLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLPrecio)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jLEstado)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRBEstado))
-                    .addComponent(jLNombre)
-                    .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLDetalle)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createSequentialGroup()
-                            .addComponent(jLCodigo)
-                            .addGap(18, 18, 18)
-                            .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jBBuscar))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPPrincipalLayout.setVerticalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPPrincipalLayout.createSequentialGroup()
                 .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -239,17 +244,17 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNombre)
-                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLDetalle)
-                    .addComponent(jCBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19)
+                    .addComponent(jTFDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLPrecio)
-                        .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLEstado))
+                        .addComponent(jTFPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLEstado)
                     .addComponent(jRBEstado))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,7 +267,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBSalir)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -313,17 +318,17 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTFPrecioKeyReleased
 
-    private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
+    private void jTFDetalleKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDetalleKeyReleased
         // TODO add your handling code here:
         Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
-        String nro = this.jTFNombre.getText();
+        String nro = this.jTFDetalle.getText();
         Matcher m = patron.matcher(nro);
         if (!m.matches() && nro.length() > 0) {
             JOptionPane.showMessageDialog(this, "No es una letra");
-            this.jTFNombre.setText(nro.substring(0, nro.length() - 1));
-            this.jTFNombre.requestFocus();
+            this.jTFDetalle.setText(nro.substring(0, nro.length() - 1));
+            this.jTFDetalle.requestFocus();
         }
-    }//GEN-LAST:event_jTFNombreKeyReleased
+    }//GEN-LAST:event_jTFDetalleKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -332,7 +337,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<String> jCBEspecialidad;
+    private javax.swing.JComboBox<String> jCBNombre;
     private javax.swing.JLabel jLCodigo;
     private javax.swing.JLabel jLDetalle;
     private javax.swing.JLabel jLEstado;
@@ -345,7 +350,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTFCodigo;
-    private javax.swing.JTextField jTFNombre;
+    private javax.swing.JTextField jTFDetalle;
     private javax.swing.JTextField jTFPrecio;
     private javax.swing.JTable jTinstalacion;
     // End of variables declaration//GEN-END:variables
@@ -361,8 +366,8 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
     }
 
     private void cargarCombo(JComboBox<String> comboBox) {
-        for (int i = 0; i < especialidaes.length; i++) {
-            comboBox.addItem(especialidaes[i]);
+        for (int i = 0; i < nombre.length; i++) {
+            comboBox.addItem(nombre[i]);
         }
     }
 

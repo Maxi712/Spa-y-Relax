@@ -93,6 +93,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMSpa.setText("Spa");
 
         jMICTratamiento.setText("Cargar Tratamiento");
+        jMICTratamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMICTratamientoActionPerformed(evt);
+            }
+        });
         jMSpa.add(jMICTratamiento);
 
         jMBMenu.add(jMSpa);
@@ -191,6 +196,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(form);
         escritorio.moveToFront(form);
     }//GEN-LAST:event_jMICConsultorioActionPerformed
+
+    private void jMICTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICTratamientoActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        CargarTratamiento form = new CargarTratamiento();
+        form.setVisible(true);
+        escritorio.add(form);
+        escritorio.moveToFront(form);
+    }//GEN-LAST:event_jMICTratamientoActionPerformed
 
     /**
      * @param args the command line arguments
