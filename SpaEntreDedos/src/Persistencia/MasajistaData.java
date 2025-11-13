@@ -21,7 +21,7 @@ import spaentrededos.Masajista;
  *
  * @author carri
  */
-class MasajistaData {
+public class MasajistaData {
     private Connection conexion;
     
     public MasajistaData(){
@@ -34,7 +34,7 @@ class MasajistaData {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, masajista.getMatricula());
             ps.setString(2, masajista.getNombreApellido());
-            ps.setInt(3, masajista.getTelefono());
+            ps.setLong(3, masajista.getTelefono());
             ps.setString(4, masajista.getEspecialidad());
             ps.setBoolean(5, masajista.isEstado());
             ps.executeUpdate();
@@ -53,7 +53,7 @@ class MasajistaData {
             String sql = "UPDATE masajista SET nombreApellido=?, telefono=?, especialidad=?, estado=? WHERE matricula=?";
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, masajista.getNombreApellido());
-            ps.setInt(2, masajista.getTelefono());
+            ps.setLong(2, masajista.getTelefono());
             ps.setString(3, masajista.getEspecialidad());
             ps.setBoolean(4, masajista.isEstado());
             ps.setInt(5, masajista.getMatricula());

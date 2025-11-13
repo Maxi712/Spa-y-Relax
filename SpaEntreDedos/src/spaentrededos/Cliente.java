@@ -23,9 +23,16 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public Cliente(int i, int edad, String dni, String telefono, String nombre, String ninguna, boolean estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Cliente(int dni, String nombreCompleto, int telefono, int edad, String afecciones, boolean estado) {
+        this.dni = dni;
+        this.nombreCompleto = nombreCompleto;
+        this.telefono = telefono;
+        this.edad = edad;
+        this.afecciones = afecciones;
+        this.estado = estado;
     }
+
+    
 
     public int getCodCli() {
         return codCli;
