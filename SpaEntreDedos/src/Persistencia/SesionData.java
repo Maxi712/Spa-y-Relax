@@ -147,7 +147,7 @@ public class SesionData {
                 ConsultorioData cd = new ConsultorioData();
                 Dia_De_SpaData dd = new Dia_De_SpaData();
 
-                s.setConsultorio(cd.buscarConsultorioPorId(rs.getInt("nroConsultorio")));
+                s.setConsultorio(cd.buscarPorNro(rs.getInt("nroConsultorio")));
                 s.setMasajista(new MasajistaData().buscarPorMatricula(matricula));
                 s.setDiaDeSpa(dd.buscarDiaSpaPorId(rs.getInt("codPack")));
                 s.setEstado(rs.getBoolean("estado"));

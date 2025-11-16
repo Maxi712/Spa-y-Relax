@@ -9,13 +9,13 @@ public class Tratamiento {
     private String nombre;
     private String tipo;
     private String detalle;
-    private List<Instalacion> productos;
+    private List<Producto> productos;
     private LocalTime duracion;
     private double costo;
     private boolean estado;
     private int totalSesiones;
 
-    public Tratamiento(int codTratam, String nombre, String tipo, String detalle, List<Instalacion> productos, LocalTime duracion, double costo, boolean estado) {
+    public Tratamiento(int codTratam, String nombre, String tipo, String detalle, List<Producto> productos, LocalTime duracion, double costo, boolean estado) {
         this.codTratam = codTratam;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -63,11 +63,11 @@ public Tratamiento(int codTratam, String nombre, String tipo, int totalSesiones)
         this.detalle = detalle;
     }
 
-    public List<Instalacion> getProductos() {
+    public List<Producto> getProductos() {
         return productos;
     }
 
-    public void setProductos(List<Instalacion> productos) {
+    public void setProductos(List<Producto> productos) {
         this.productos = productos;
     }
 
