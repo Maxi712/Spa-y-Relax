@@ -47,12 +47,8 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
      */
     public ListarInstalcionesLibres() {
         initComponents();
-        cambiarTextField(this.jTFMatricula);
-        cambiarTextField(this.jTFNombre);
-        cambiarTextField(this.jTFTelefono);
-        estiloComboBox(this.jCBEspecialidad);
-        cargarCombo(this.jCBEspecialidad);
-        armarCabecera();
+        cambiarTextField(this.jTFHora1);
+        cambiarTextField(this.jTFHora2);
         cargarDatosTabla();
     }
 
@@ -68,24 +64,13 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
         jPPrincipal = new javax.swing.JPanel();
         jPTitulo = new javax.swing.JPanel();
         jLTitulo = new javax.swing.JLabel();
-        jLMatricula = new javax.swing.JLabel();
-        jTFMatricula = new javax.swing.JTextField();
-        jBBuscar = new javax.swing.JButton();
-        jLNombre = new javax.swing.JLabel();
-        jTFNombre = new javax.swing.JTextField();
-        jLTelefono = new javax.swing.JLabel();
-        jTFTelefono = new javax.swing.JTextField();
-        jLEspecialidad = new javax.swing.JLabel();
-        jLEstado = new javax.swing.JLabel();
-        jRBEstado = new javax.swing.JRadioButton();
-        jBAgregar = new javax.swing.JButton();
-        jBModificar = new javax.swing.JButton();
-        jBEliminar = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        jTFHora1 = new javax.swing.JTextField();
+        jLHoraio = new javax.swing.JLabel();
+        jTFHora2 = new javax.swing.JTextField();
+        jLA = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTMasajista = new javax.swing.JTable();
+        jTInstalacionesLibres = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
-        jCBEspecialidad = new javax.swing.JComboBox<>();
 
         jPPrincipal.setBackground(new java.awt.Color(249, 246, 238));
 
@@ -94,7 +79,7 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
         jLTitulo.setBackground(new java.awt.Color(255, 255, 255));
         jLTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLTitulo.setForeground(new java.awt.Color(168, 213, 186));
-        jLTitulo.setText("Cargar Masajista");
+        jLTitulo.setText("Instalaciones Libres");
 
         javax.swing.GroupLayout jPTituloLayout = new javax.swing.GroupLayout(jPTitulo);
         jPTitulo.setLayout(jPTituloLayout);
@@ -113,80 +98,32 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20))
         );
 
-        jLMatricula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLMatricula.setForeground(new java.awt.Color(53, 94, 59));
-        jLMatricula.setText("Matricula:");
-
-        jTFMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFHora1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFMatriculaKeyReleased(evt);
+                jTFHora1KeyReleased(evt);
             }
         });
 
-        jBBuscar.setBackground(new java.awt.Color(249, 246, 238));
-        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LUPAX16.png"))); // NOI18N
-        jBBuscar.setText("Buscar");
-        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jLHoraio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLHoraio.setForeground(new java.awt.Color(53, 94, 59));
+        jLHoraio.setText("Intalacion libre de:");
+
+        jTFHora2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBBuscarActionPerformed(evt);
+                jTFHora2ActionPerformed(evt);
             }
         });
-
-        jLNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLNombre.setForeground(new java.awt.Color(53, 94, 59));
-        jLNombre.setText("Nombre y Apellido:");
-
-        jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFHora2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFNombreKeyReleased(evt);
+                jTFHora2KeyReleased(evt);
             }
         });
 
-        jLTelefono.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLTelefono.setForeground(new java.awt.Color(53, 94, 59));
-        jLTelefono.setText("Telefono:");
+        jLA.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLA.setForeground(new java.awt.Color(53, 94, 59));
+        jLA.setText("A:");
 
-        jTFTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFTelefonoKeyReleased(evt);
-            }
-        });
-
-        jLEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLEspecialidad.setForeground(new java.awt.Color(53, 94, 59));
-        jLEspecialidad.setText("Especialidad:");
-
-        jLEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLEstado.setForeground(new java.awt.Color(53, 94, 59));
-        jLEstado.setText("Estado:");
-
-        jRBEstado.setBackground(new java.awt.Color(249, 246, 238));
-
-        jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/14.png"))); // NOI18N
-        jBAgregar.setToolTipText("Agregar Masajista");
-        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAgregarActionPerformed(evt);
-            }
-        });
-
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/15.png"))); // NOI18N
-        jBModificar.setToolTipText("Modificar Masajista");
-        jBModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBModificarActionPerformed(evt);
-            }
-        });
-
-        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16.png"))); // NOI18N
-        jBEliminar.setToolTipText("Eliminar Masajista");
-        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEliminarActionPerformed(evt);
-            }
-        });
-
-        jTMasajista.setModel(new javax.swing.table.DefaultTableModel(
+        jTInstalacionesLibres.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -197,7 +134,7 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTMasajista);
+        jScrollPane1.setViewportView(jTInstalacionesLibres);
 
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit_16560328.png"))); // NOI18N
         jBSalir.setText("Salir");
@@ -213,87 +150,37 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPPrincipalLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLNombre)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFNombre))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLEspecialidad)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCBEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLTelefono)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLEstado)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRBEstado)))
-                        .addGap(99, 99, 99))
-                    .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLMatricula)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBBuscar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(132, 132, 132)
+                .addComponent(jLHoraio)
+                .addGap(18, 18, 18)
+                .addComponent(jTFHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLA)
+                .addGap(18, 18, 18)
+                .addComponent(jTFHora2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPPrincipalLayout.createSequentialGroup()
-                            .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jBSalir)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29))
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBSalir)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50))
         );
         jPPrincipalLayout.setVerticalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPPrincipalLayout.createSequentialGroup()
                 .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLMatricula)
-                        .addComponent(jTFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLNombre)
-                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLEspecialidad)
-                    .addComponent(jCBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRBEstado, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLTelefono)
-                        .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLEstado)))
-                .addGap(18, 18, 18)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBModificar)
-                    .addComponent(jBAgregar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                    .addComponent(jTFHora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLHoraio)
+                    .addComponent(jLA)
+                    .addComponent(jTFHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBSalir)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -320,147 +207,46 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
-    private void jTFMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMatriculaKeyReleased
+    private void jTFHora1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFHora1KeyReleased
         // TODO add your handling code here:
         Pattern patron = Pattern.compile("[0-9_.]+");
-        String nro = this.jTFMatricula.getText();
+        String nro = this.jTFHora1.getText();
         Matcher m = patron.matcher(nro);
         if (!m.matches() && nro.length() > 0) {
             JOptionPane.showMessageDialog(this, "No es un numero");
-            this.jTFMatricula.setText(nro.substring(0, nro.length() - 1));
-            this.jTFMatricula.requestFocus();
+            this.jTFHora1.setText(nro.substring(0, nro.length() - 1));
+            this.jTFHora1.requestFocus();
         }
-    }//GEN-LAST:event_jTFMatriculaKeyReleased
+    }//GEN-LAST:event_jTFHora1KeyReleased
 
-    private void jTFTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelefonoKeyReleased
-        // TODO add your handling code here:
-        Pattern patron = Pattern.compile("[0-9_.]+");
-        String nro = this.jTFTelefono.getText();
-        Matcher m = patron.matcher(nro);
-        if (!m.matches() && nro.length() > 0) {
-            JOptionPane.showMessageDialog(this, "No es un numero");
-            this.jTFTelefono.setText(nro.substring(0, nro.length() - 1));
-            this.jTFTelefono.requestFocus();
-        }
-    }//GEN-LAST:event_jTFTelefonoKeyReleased
-
-    private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
+    private void jTFHora2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFHora2KeyReleased
         // TODO add your handling code here:
         Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
-        String nro = this.jTFNombre.getText();
+        String nro = this.jTFHora2.getText();
         Matcher m = patron.matcher(nro);
         if (!m.matches() && nro.length() > 0) {
             JOptionPane.showMessageDialog(this, "No es una letra");
-            this.jTFNombre.setText(nro.substring(0, nro.length() - 1));
-            this.jTFNombre.requestFocus();
+            this.jTFHora2.setText(nro.substring(0, nro.length() - 1));
+            this.jTFHora2.requestFocus();
         }
-    }//GEN-LAST:event_jTFNombreKeyReleased
+    }//GEN-LAST:event_jTFHora2KeyReleased
 
-    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+    private void jTFHora2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFHora2ActionPerformed
         // TODO add your handling code here:
-        try {
-            if (!this.jTFMatricula.getText().isEmpty()) {
-                ArrayList<Masajista> masajista = masajistaData.listarMasajista();
-                for (Masajista m : masajista) {
-                    if (m.getMatricula() == Integer.parseInt(this.jTFMatricula.getText())) {
-                        this.jTFMatricula.setText(Integer.toString(m.getMatricula()));
-                        this.jTFNombre.setText(m.getNombreApellido());
-                        this.jCBEspecialidad.setSelectedItem(m.getEspecialidad());
-                        this.jTFTelefono.setText(Long.toString(m.getTelefono()));
-                        this.jRBEstado.setSelected(m.isEstado());
-                    }
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "El campo Matricula esta vacio");
-            }
-        } catch (NumberFormatException ex) {
-            System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
-        }
-    }//GEN-LAST:event_jBBuscarActionPerformed
-
-    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
-        // TODO add your handling code here:
-        try {
-            if (!this.jTFMatricula.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() && !this.jTFTelefono.getText().isEmpty() && this.jCBEspecialidad.getSelectedItem() != null) {
-                int matricula = Integer.parseInt(this.jTFMatricula.getText());
-                String nombre = this.jTFNombre.getText();
-                String especialidad = (String) this.jCBEspecialidad.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFTelefono.getText());
-                boolean estado = this.jRBEstado.isSelected();
-                Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
-                masajistaData.GuardarMasajista(m);
-            }
-            limpiarCampos();
-            modelo.setRowCount(0);
-            cargarDatosTabla();
-        } catch (NumberFormatException ex) {
-            System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
-        }
-    }//GEN-LAST:event_jBAgregarActionPerformed
-
-    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        // TODO add your handling code here:
-       try {
-            if (!this.jTFMatricula.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() || !this.jTFTelefono.getText().isEmpty() || this.jCBEspecialidad.getSelectedItem() != null) {
-                int matricula = Integer.parseInt(this.jTFMatricula.getText());
-                String nombre = this.jTFNombre.getText();
-                String especialidad = (String) this.jCBEspecialidad.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFTelefono.getText());
-                boolean estado = this.jRBEstado.isSelected();
-                Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
-                masajistaData.modificarMasajista(m);
-            }
-            limpiarCampos();
-            modelo.setRowCount(0);
-            cargarDatosTabla();
-        } catch (NumberFormatException ex) {
-            System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
-        } 
-    }//GEN-LAST:event_jBModificarActionPerformed
-
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        // TODO add your handling code here:
-        try{
-            if(!this.jTFMatricula.getText().isEmpty()){
-                int matricula = Integer.parseInt(this.jTFMatricula.getText());
-                masajistaData.eliminarMasajista(matricula);
-            }
-            
-            limpiarCampos();
-            modelo.setRowCount(0);
-            cargarDatosTabla();
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" +ex.getMessage());
-        }
-    }//GEN-LAST:event_jBEliminarActionPerformed
+    }//GEN-LAST:event_jTFHora2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBAgregar;
-    private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jBEliminar;
-    private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<String> jCBEspecialidad;
-    private javax.swing.JLabel jLEspecialidad;
-    private javax.swing.JLabel jLEstado;
-    private javax.swing.JLabel jLMatricula;
-    private javax.swing.JLabel jLNombre;
-    private javax.swing.JLabel jLTelefono;
+    private javax.swing.JLabel jLA;
+    private javax.swing.JLabel jLHoraio;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPPrincipal;
     private javax.swing.JPanel jPTitulo;
-    private javax.swing.JRadioButton jRBEstado;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTFMatricula;
-    private javax.swing.JTextField jTFNombre;
-    private javax.swing.JTextField jTFTelefono;
-    private javax.swing.JTable jTMasajista;
+    private javax.swing.JTextField jTFHora1;
+    private javax.swing.JTextField jTFHora2;
+    private javax.swing.JTable jTInstalacionesLibres;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarTextField(JTextField campo) {
@@ -473,36 +259,19 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
         campo.setCaretColor(Color.GRAY); // color del curso
     }
 
-    private void cargarCombo(JComboBox<String> comboBox) {
-        for (int i = 0; i < especialidaes.length; i++) {
-            comboBox.addItem(especialidaes[i]);
-        }
-    }
-
-    private void estiloComboBox(JComboBox<String> combo) {
-        Color borde = new Color(53, 94, 59);
-        combo.setBackground(new Color(0, 0, 0, 0)); // Fondo transparente
-        combo.setForeground(Color.DARK_GRAY);          // Texto verde
-        combo.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, borde)); // Línea verde abajo
-        UIManager.put("ComboBox.popupBackground", Color.WHITE);
-
-    }
-
     private void armarCabecera() {
-        modelo.addColumn("Matricula");
-        modelo.addColumn("Nombre Apellido");
-        modelo.addColumn("Especialidad");
-        modelo.addColumn("Telefono");
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Detalle");
+        modelo.addColumn("Precio");
         modelo.addColumn("Estado");
-        jTMasajista.setModel(modelo);
+        jTInstalacionesLibres.setModel(modelo);
     }
 
     private void limpiarCampos() {
-        this.jTFMatricula.setText("");
-        this.jTFNombre.setText("");
-        this.jCBEspecialidad.setSelectedItem(null);
-        this.jTFTelefono.setText("");
-        this.jRBEstado.setSelected(false);
+        this.jTFHora1.setText("");
+        this.jTFHora2.setText("");
+       
     }
     
     private void cargarDatosTabla(){

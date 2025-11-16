@@ -7,6 +7,9 @@ public class Consultorio {
     private String equipamiento;
     private boolean apto;
 
+    public Consultorio() {
+    }
+    
     public Consultorio(int nroConsultorio, String usos, String equipamiento, boolean apto) {
         this.nroConsultorio = nroConsultorio;
         this.usos = usos;

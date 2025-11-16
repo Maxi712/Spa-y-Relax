@@ -1,4 +1,4 @@
-
+ 
 package Persistencia;
 import Modelo.Conexion;
 import java.sql.*;
@@ -10,7 +10,7 @@ import spaentrededos.Tratamiento;
 public class TratamientoData {
     private Connection  con = null;
     
-    public TratamientoData(Conexion conexion){
+    public TratamientoData(){
         this.con = Conexion.getConexion();
     }
     public List<Tratamiento> listarTratamientosPorTipo(String tipo) throws SQLException{

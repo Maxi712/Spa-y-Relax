@@ -24,7 +24,7 @@ import spaentrededos.Sesion;
 public class SesionData {
 
     private Connection conexion;
-
+    TratamientoData td = new TratamientoData();
     public SesionData() {
         conexion = Conexion.getConexion();
 
@@ -36,7 +36,7 @@ public class SesionData {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setTimestamp(1, Timestamp.valueOf(s.getFechaHoraInicio()));
             ps.setTimestamp(2, Timestamp.valueOf(s.getFechaHoraFin()));
-            ps.setString(3, s.getTratamiento());
+            ps.setInt(3, s.getTratamiento().getCodTratam());
             ps.setInt(4, s.getConsultorio().getNroConsultorio());
             ps.setInt(5, s.getMasajista().getMatricula());
             ps.setInt(6, s.getDiaDeSpa().getCodPack());
@@ -56,12 +56,12 @@ public class SesionData {
     }
 
     public void modificarSesion(Sesion s) {
-        String sql = "UPDATE sesion SET fechaHoraInicio=?, fechaHoraFin=?, tratamiento=?, nroConsultorio=?, matricula=?, codPack=?, estado=? WHERE codSesion=?";
+        String sql = "UPDATE sesion SET fech aHoraInicio=?, fechaHoraFin=?, tratamiento=?, nroConsultorio=?, matricula=?, codPack=?, estado=? WHERE codSesion=?";
         try {
             PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setTimestamp(1, Timestamp.valueOf(s.getFechaHoraInicio()));
             ps.setTimestamp(2, Timestamp.valueOf(s.getFechaHoraFin()));
-            ps.setString(3, s.getTratamiento());
+            ps.setInt(3, s.getTratamiento().getCodTratam());
             ps.setInt(4, s.getConsultorio().getNroConsultorio());
             ps.setInt(5, s.getMasajista().getMatricula());
             ps.setInt(6, s.getDiaDeSpa().getCodPack());
@@ -110,7 +110,7 @@ public class SesionData {
                 s.setCodSesion(rs.getInt("codSesion"));
                 s.setFechaHoraInicio(rs.getTimestamp("fechaHoraInicio").toLocalDateTime());
                 s.setFechaHoraFin(rs.getTimestamp("fechaHoraFin").toLocalDateTime());
-                s.setTratamiento(rs.getString("tratamiento"));
+                s.setTratamiento(td);
 
                 ConsultorioData cd = new ConsultorioData();
                 MasajistaData md = new MasajistaData();
