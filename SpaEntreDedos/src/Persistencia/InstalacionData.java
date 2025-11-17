@@ -18,17 +18,16 @@ import spaentrededos.Instalacion;
 
 
 public class InstalacionData {
-    private Connection c=null;
+    private Connection c;
 
-    public InstalacionData(Conexion conexion) {
-        this.c = conexion.getConexion();
+    public InstalacionData() {
+        c= Conexion.getConexion();
     }
     
     public void agregarInstalacion(Instalacion ins){
-        String sql = "INSERT INTO instalacion (codInstal, nombre, detalleUso, precio30M, estado) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO instalacion (nombre, detalleUso, precio30M, estado) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, ins.getCodInstal());
             ps.setString(2, ins.getNombre());
             ps.setString(3, ins.getDetalleUso());
             ps.setDouble(4, ins.getPrecio30M());
@@ -92,7 +91,7 @@ public class InstalacionData {
         }
     }
     
-    public List <Instalacion>listarInstalaciones() {
+    public ArrayList <Instalacion>listarInstalaciones() {
         List <Instalacion> listaI=new ArrayList<>();
         String sql="SELECT * FROM instalacion ";
         try{
@@ -112,7 +111,7 @@ public class InstalacionData {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla instalacion ..."+ex.getMessage());
         }
-        return listaI;
+        return (ArrayList<Instalacion>) listaI;
     }
     
     public List <Instalacion>listarInstalacionesLibresHora (LocalDate fecha, LocalTime hi, LocalTime hf){
