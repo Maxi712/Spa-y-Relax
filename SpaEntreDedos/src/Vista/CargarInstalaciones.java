@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -175,6 +176,11 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
 
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/25.png"))); // NOI18N
         jBEliminar.setToolTipText("Eliminar Instalacion");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jTinstalacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -407,6 +413,14 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        int codigo=Integer.parseInt(this.jTFCodigo.getText());
+        insData.eliminarInstalacion(codigo);
+        limpiarCampos();
+        modelo.setRowCount(0);
+        cargarTabla();
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
