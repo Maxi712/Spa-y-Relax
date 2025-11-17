@@ -20,7 +20,7 @@ public class TratamientoData {
     }
 
     public void guardarTratamiento(Tratamiento tratamiento){
-        String sql = "INSERT INTO tratamiento(nombre, tipo, detalle, duracion, costo, estado, idProducto ) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO tratamiento(nombre, tipo, detalle, duracion, costo, estado, idProducto, totalSesiones) VALUES (?,?,?,?,?,?,?)";
         try{
             PreparedStatement ps = conexion.prepareStatement(sql, org.mariadb.jdbc.Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, tratamiento.getNombre());
@@ -32,6 +32,7 @@ public class TratamientoData {
             for(Producto p : tratamiento.getProductos()){
                 ps.setInt(7, p.getIdProducto());
             }
+            ps.setInt(8, tratamiento.getTotalSesiones());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()){

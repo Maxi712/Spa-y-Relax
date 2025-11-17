@@ -110,7 +110,7 @@ public class SesionData {
                 s.setCodSesion(rs.getInt("codSesion"));
                 s.setFechaHoraInicio(rs.getTimestamp("fechaHoraInicio").toLocalDateTime());
                 s.setFechaHoraFin(rs.getTimestamp("fechaHoraFin").toLocalDateTime());
-                s.setTratamiento(td);
+                s.setTratamiento(td.buscarPorCod(rs.getInt("tratamiento")));
 
                 ConsultorioData cd = new ConsultorioData();
                 MasajistaData md = new MasajistaData();
@@ -142,7 +142,7 @@ public class SesionData {
                 s.setCodSesion(rs.getInt("codSesion"));
                 s.setFechaHoraInicio(rs.getTimestamp("fechaHoraInicio").toLocalDateTime());
                 s.setFechaHoraFin(rs.getTimestamp("fechaHoraFin").toLocalDateTime());
-                s.setTratamiento(rs.getString("tratamiento"));
+                s.setTratamiento(td.buscarPorCod(rs.getInt("tratamiento")));
 
                 ConsultorioData cd = new ConsultorioData();
                 Dia_De_SpaData dd = new Dia_De_SpaData();

@@ -51,9 +51,11 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         cambiarTextField(this.jTFNombre);
         cambiarTextField(this.jTFTelefono);
         estiloComboBox(this.jCBEspecialidad);
+        estiloComboBox(this.jCBEspecialidad1);
         cargarCombo(this.jCBEspecialidad);
+        cargarCombo(this.jCBEspecialidad1);
         armarCabecera();
-        cargarDatosTabla();
+        cargarDatosTabla(masajistaData.listarMasajista());
     }
 
     /**
@@ -206,6 +208,12 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
+            }
+        });
+
+        jCBEspecialidad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBEspecialidad1ActionPerformed(evt);
             }
         });
 
@@ -383,7 +391,7 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
                         this.jTFMatricula.setText(Integer.toString(m.getMatricula()));
                         this.jTFNombre.setText(m.getNombreApellido());
                         this.jCBEspecialidad.setSelectedItem(m.getEspecialidad());
-                        this.jTFTelefono.setText(Long.toString(m.getTelefono()));
+                        this.jTFTelefono.setText(m.getTelefono());
                         this.jRBEstado.setSelected(m.isEstado());
                     }
                 }
@@ -403,14 +411,15 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
                 int matricula = Integer.parseInt(this.jTFMatricula.getText());
                 String nombre = this.jTFNombre.getText();
                 String especialidad = (String) this.jCBEspecialidad.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFTelefono.getText());
+                String telefono = this.jTFTelefono.getText();
                 boolean estado = this.jRBEstado.isSelected();
                 Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
                 masajistaData.GuardarMasajista(m);
             }
             limpiarCampos();
             modelo.setRowCount(0);
-            cargarDatosTabla();
+            ArrayList<Masajista> masajista=masajistaData.listarMasajista();
+            cargarDatosTabla(masajista);
         } catch (NumberFormatException ex) {
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
@@ -424,14 +433,15 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
                 int matricula = Integer.parseInt(this.jTFMatricula.getText());
                 String nombre = this.jTFNombre.getText();
                 String especialidad = (String) this.jCBEspecialidad.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFTelefono.getText());
+                String telefono =this.jTFTelefono.getText();
                 boolean estado = this.jRBEstado.isSelected();
                 Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
                 masajistaData.modificarMasajista(m);
             }
             limpiarCampos();
             modelo.setRowCount(0);
-            cargarDatosTabla();
+            ArrayList<Masajista> masajista=masajistaData.listarMasajista();
+            cargarDatosTabla(masajista);
         } catch (NumberFormatException ex) {
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
@@ -448,12 +458,27 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
             
             limpiarCampos();
             modelo.setRowCount(0);
-            cargarDatosTabla();
+            ArrayList<Masajista> masajista=masajistaData.listarMasajista();
+            cargarDatosTabla(masajista);
         }catch(NumberFormatException ex){
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Numero no valido" +ex.getMessage());
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jCBEspecialidad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEspecialidad1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            String especialidad = (String) this.jCBEspecialidad1.getSelectedItem();
+            ArrayList<Masajista> masajista= masajistaData.buscarPorEspecialidad(especialidad);
+            cargarDatosTabla(masajista);
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" +ex.getMessage());
+        }
+        
+        
+    }//GEN-LAST:event_jCBEspecialidad1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -524,8 +549,7 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         this.jRBEstado.setSelected(false);
     }
     
-    private void cargarDatosTabla(){
-        ArrayList<Masajista> masajista = masajistaData.listarMasajista();
+    private void cargarDatosTabla(ArrayList<Masajista> masajista){
         for(Masajista m : masajista){
             if(m.isEstado()== true){
                 modelo.addRow(new Object[]{m.getMatricula(), m.getNombreApellido(), m.getEspecialidad(), m.getTelefono(), "Activo"});

@@ -8,6 +8,16 @@ public class Instalacion {
     private double precio30M;
     private boolean estado;
 
+    public Instalacion() {
+    }
+
+    public Instalacion(String nombre, String detalleUso, double precio30M, boolean estado) {
+        this.nombre = nombre;
+        this.detalleUso = detalleUso;
+        this.precio30M = precio30M;
+        this.estado = estado;
+    }
+
     public Instalacion(int codInstal, String nombre, String detalleUso, double precio30M, boolean estado) {
         this.codInstal = codInstal;
         this.nombre = nombre;

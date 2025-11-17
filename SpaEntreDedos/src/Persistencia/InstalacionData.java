@@ -63,11 +63,11 @@ public class InstalacionData {
         }
     }
     
-    public void eliminarInstalacion (Instalacion ins){
+    public void eliminarInstalacion (int ins){
         String sql="UPDATE instalacion SET estado=0 WHERE codInstal=?";
         try{
             PreparedStatement ps=c.prepareStatement(sql);
-            ps.setInt(1, ins.getCodInstal());
+            ps.setInt(1, ins);
             int e=ps.executeUpdate();
             if(e == 1){
                 JOptionPane.showMessageDialog(null, "Instalacion eliminada ...");

@@ -125,6 +125,12 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
             }
         });
 
+        jTFEquipamiento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFEquipamientoKeyReleased(evt);
+            }
+        });
+
         jLEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLEspecialidad.setForeground(new java.awt.Color(53, 94, 59));
         jLEspecialidad.setText("Equipamiento:");
@@ -137,12 +143,27 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
 
         jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/20.png"))); // NOI18N
         jBAgregar.setToolTipText("Agregar Consultorio");
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarActionPerformed(evt);
+            }
+        });
 
         jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/21.png"))); // NOI18N
         jBModificar.setToolTipText("Modificar Consultorio");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/22.png"))); // NOI18N
         jBEliminar.setToolTipText("Eliminar Consultorio");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jTConsultorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,6 +308,50 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
             this.jTFUsos.requestFocus();
         }
     }//GEN-LAST:event_jTFUsosKeyReleased
+
+    private void jTFEquipamientoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFEquipamientoKeyReleased
+        // TODO add your handling code here:\
+        Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
+        String nro = this.jTFEquipamiento.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es una letra");
+            this.jTFEquipamiento.setText(nro.substring(0, nro.length() - 1));
+            this.jTFEquipamiento.requestFocus();
+        }
+    }//GEN-LAST:event_jTFEquipamientoKeyReleased
+
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
+        // TODO add your handling code here:
+        try{
+            if(!this.jTFNumero.getText().isEmpty() && !this.jTFUsos.getText().isEmpty() && !this.jTFEquipamiento.getText().isEmpty()){
+                
+            }
+        }catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBAgregarActionPerformed
+
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+        }catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        // TODO add your handling code here:
+        try{
+            
+        }catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

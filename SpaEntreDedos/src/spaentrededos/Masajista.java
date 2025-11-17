@@ -4,14 +4,14 @@ package spaentrededos;
 public class Masajista {
     private int matricula;
     private String nombreApellido;
-    private long telefono;
+    private String telefono;
     private String especialidad;
     private boolean estado;
 
     public Masajista() {
     }
     
-    public Masajista(int matricula, String nombreApellido, long telefono, String especialidad, boolean estado) {
+    public Masajista(int matricula, String nombreApellido, String telefono, String especialidad, boolean estado) {
         this.matricula = matricula;
         this.nombreApellido = nombreApellido;
         this.telefono = telefono;
@@ -35,11 +35,11 @@ public class Masajista {
         this.nombreApellido = nombreApellido;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

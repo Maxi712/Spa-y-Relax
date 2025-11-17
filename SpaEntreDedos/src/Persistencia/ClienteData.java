@@ -33,7 +33,7 @@ public class ClienteData {
             PreparedStatement ps = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, c.getDni());
             ps.setString(2, c.getNombreCompleto());
-            ps.setInt(3, c.getTelefono());
+            ps.setString(3, c.getTelefono());
             ps.setInt(4, c.getEdad());
             ps.setString(5, c.getAfecciones());
             ps.setBoolean(6, c.isEstado());
@@ -61,7 +61,7 @@ public class ClienteData {
             PreparedStatement ps = conexion.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setInt(1, c.getDni());
             ps.setString(2, c.getNombreCompleto());
-            ps.setInt(3, c.getTelefono());
+            ps.setString(3, c.getTelefono());
             ps.setInt(4, c.getEdad());
             ps.setString(5, c.getAfecciones());
             ps.setBoolean(6, c.isEstado());
@@ -110,7 +110,7 @@ public class ClienteData {
                 c.setCodCli(rs.getInt("codCli"));
                 c.setDni(rs.getInt("dni"));
                 c.setNombreCompleto(rs.getString("nombreCompleto"));
-                c.setTelefono(rs.getInt("telefono"));
+                c.setTelefono(rs.getString("telefono"));
                 c.setEdad(rs.getInt("edad"));
                 c.setAfecciones(rs.getString("afecciones"));
                 c.setEstado(rs.getBoolean("estado"));
@@ -137,7 +137,7 @@ public class ClienteData {
                 c.setCodCli(rs.getInt("codCli"));
                 c.setDni(rs.getInt("dni"));
                 c.setNombreCompleto(rs.getString("nombreCompleto"));
-                c.setTelefono(rs.getInt("telefono"));
+                c.setTelefono(rs.getString("telefono"));
                 c.setEdad(rs.getInt("edad"));
                 c.setAfecciones(rs.getString("afecciones"));
                 c.setEstado(rs.getBoolean("estado"));
@@ -162,7 +162,7 @@ public class ClienteData {
                 c.setCodCli(rs.getInt("codCli"));
                 c.setDni(rs.getInt("dni"));
                 c.setNombreCompleto(rs.getString("nombreCompleto"));
-                c.setTelefono(rs.getInt("telefono"));
+                c.setTelefono(rs.getString("telefono"));
                 c.setEdad(rs.getInt("edad"));
                 c.setAfecciones(rs.getString("afecciones"));
                 c.setEstado(rs.getBoolean("estado"));

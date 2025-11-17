@@ -429,7 +429,7 @@ public class CargarCliente extends javax.swing.JInternalFrame {
                         this.jTFCodigo.setText(Integer.toString(c.getCodCli()));
                         this.jTFDocumento.setText(Integer.toString(c.getDni()));
                         this.jTFNombre.setText(c.getNombreCompleto());
-                        this.jTFTelefono.setText(Integer.toString(c.getTelefono()));
+                        this.jTFTelefono.setText (c.getTelefono());
                         this.jTFEdad.setText(Integer.toString(c.getEdad()));
                         this.jTFAfecciones.setText(c.getAfecciones());
                         this.jRBEstado.setSelected(c.isEstado());
@@ -450,7 +450,7 @@ public class CargarCliente extends javax.swing.JInternalFrame {
             if (!this.jTFDocumento.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() && !this.jTFTelefono.getText().isEmpty() && !this.jTFEdad.getText().isEmpty() && !this.jTFAfecciones.getText().isEmpty()) {
                 int documento = Integer.parseInt(this.jTFDocumento.getText());
                 String nombre = this.jTFNombre.getText();
-                int telefono = Integer.parseInt(this.jTFTelefono.getText());
+                String telefono = this.jTFTelefono.getText();
                 int edad = Integer.parseInt(this.jTFEdad.getText());
                 String afecciones = this.jTFAfecciones.getText();
                 boolean estado = this.jRBEstado.isSelected();
@@ -473,7 +473,7 @@ public class CargarCliente extends javax.swing.JInternalFrame {
                 int codigo = Integer.parseInt(this.jTFCodigo.getText());
                 int documento = Integer.parseInt(this.jTFDocumento.getText());
                 String nombre = this.jTFNombre.getText();
-                int telefono = Integer.parseInt(this.jTFTelefono.getText());
+                String telefono = this.jTFTelefono.getText();
                 int edad = Integer.parseInt(this.jTFEdad.getText());
                 String afecciones = this.jTFAfecciones.getText();
                 boolean estado = this.jRBEstado.isSelected();

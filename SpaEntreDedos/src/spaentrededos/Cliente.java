@@ -5,7 +5,7 @@ public class Cliente {
     private int codCli;
     private int dni;
     private String nombreCompleto;
-    private int telefono;
+    private String telefono;
     private int edad;
     private String afecciones;
     private boolean estado;
@@ -13,7 +13,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(int codCli, int dni, String nombreCompleto, int telefono, int edad, String afecciones, boolean estado) {
+    public Cliente(int codCli, int dni, String nombreCompleto, String telefono, int edad, String afecciones, boolean estado) {
         this.codCli = codCli;
         this.dni = dni;
         this.nombreCompleto = nombreCompleto;
@@ -23,7 +23,7 @@ public class Cliente {
         this.estado = estado;
     }
 
-    public Cliente(int dni, String nombreCompleto, int telefono, int edad, String afecciones, boolean estado) {
+    public Cliente(int dni, String nombreCompleto, String telefono, int edad, String afecciones, boolean estado) {
         this.dni = dni;
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
@@ -58,11 +58,11 @@ public class Cliente {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

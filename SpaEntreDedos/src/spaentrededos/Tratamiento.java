@@ -113,6 +113,14 @@ public Tratamiento(int codTratam, String nombre, String tipo, int totalSesiones)
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    public int getTotalSesiones() {
+        return totalSesiones;
+    }
+
+    public void setTotalSesiones(int totalSesiones) {
+        this.totalSesiones = totalSesiones;
+    }
     
     
 }
