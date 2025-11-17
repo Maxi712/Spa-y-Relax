@@ -5,10 +5,12 @@
  */
 package Vista;
 
+import Persistencia.InstalacionData;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
@@ -21,6 +23,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import spaentrededos.Instalacion;
 
 /**
  *
@@ -36,9 +39,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
     };
     private String[] nombre = {"Baño Turco", "Ducha", "Hidromasaje", "Jacuzzi", "Piscina", "Sauna", "Zona Relax"};
 
-    /**
-     * Creates new form CargaMasajista
-     */
+    InstalacionData insData=new InstalacionData();
     public CargarInstalaciones() {
         initComponents();
         cambiarTextField(this.jTFCodigo);
@@ -47,6 +48,7 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         estiloComboBox(this.jCBNombre);
         cargarCombo(this.jCBNombre);
         armarCabecera();
+        cargarTabla();
     }
 
     /**
@@ -119,6 +121,11 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jBBuscar.setBackground(new java.awt.Color(249, 246, 238));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LUPAX16.png"))); // NOI18N
         jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jLNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(53, 94, 59));
@@ -152,9 +159,19 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
 
         jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/23.png"))); // NOI18N
         jBAgregar.setToolTipText("Agregar Instalcion");
+        jBAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAgregarActionPerformed(evt);
+            }
+        });
 
         jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/24.png"))); // NOI18N
         jBModificar.setToolTipText("Modificar Instalacion");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/25.png"))); // NOI18N
         jBEliminar.setToolTipText("Eliminar Instalacion");
@@ -177,6 +194,12 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
+            }
+        });
+
+        jCBNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBNombreActionPerformed(evt);
             }
         });
 
@@ -330,6 +353,61 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTFDetalleKeyReleased
 
+    private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
+        try{
+            if(!this.jTFDetalle.getText().isEmpty()&&!this.jTFPrecio.getText().isEmpty()){
+                String nombre=(String)this.jCBNombre.getSelectedItem();
+                String detalle=this.jTFDetalle.getText();
+                double precio= Double.parseDouble(jTFPrecio.getText());
+                boolean estado=this.jRBEstado.isSelected();
+                Instalacion ins=new Instalacion(nombre,detalle,precio,estado);
+                insData.agregarInstalacion(ins);
+            }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            cargarTabla();
+            
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error con el numero");
+        }
+    }//GEN-LAST:event_jBAgregarActionPerformed
+
+    private void jCBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBNombreActionPerformed
+
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        try{
+            if(!this.jTFDetalle.getText().isEmpty()&&!this.jTFPrecio.getText().isEmpty()){
+                int CodInstal = Integer.parseInt(this.jTFCodigo.getText());
+                String nombre=(String)this.jCBNombre.getSelectedItem();
+                String detalle=this.jTFDetalle.getText();
+                double precio= Double.parseDouble(jTFPrecio.getText());
+                boolean estado=this.jRBEstado.isSelected();
+                Instalacion ins=new Instalacion(CodInstal,nombre,detalle,precio,estado);
+                insData.modificarInstalacion(ins);
+            }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            cargarTabla();
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(this, "Error con el numero");
+        }
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        ArrayList <Instalacion> linst=new ArrayList ();
+        linst=insData.listarInstalaciones();
+        int codigo=Integer.parseInt(jTFCodigo.getText());
+        for (Instalacion i : linst) {
+            if(codigo==i.getCodInstal()){
+                this.jCBNombre.setSelectedItem(i.getNombre());
+                this.jTFDetalle.setText(i.getDetalleUso());
+                this.jTFPrecio.setText(Integer.toString(i.getCodInstal()));
+            }
+        }
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
@@ -387,6 +465,26 @@ public class CargarInstalaciones extends javax.swing.JInternalFrame {
         modelo.addColumn("Precio");
         modelo.addColumn("Estado");
         jTinstalacion.setModel(modelo);
+    }
+    
+    private void cargarTabla(){
+        ArrayList<Instalacion>lins=new ArrayList();
+        lins=insData.listarInstalaciones();
+        for (Instalacion i : lins) {
+            if(i.isEstado()==true){
+            modelo.addRow(new Object[]{i.getCodInstal(),i.getNombre(),i.getDetalleUso(),i.getPrecio30M(),"activo"});
+            }else{
+                modelo.addRow(new Object[]{i.getCodInstal(),i.getNombre(),i.getDetalleUso(),i.getPrecio30M(),"inactivo"});
+            }
+        }
+        
+    }
+    
+    private void limpiarCampos(){
+        jTFCodigo.setText("");
+        jTFDetalle.setText("");
+        jTFPrecio.setText("");
+        jRBEstado.setSelected(false);
     }
     
 }
