@@ -141,14 +141,14 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
 
         jRBEstado.setBackground(new java.awt.Color(249, 246, 238));
 
-        jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/14.png"))); // NOI18N
-        jBAgregar.setToolTipText("Agregar Masajista");
+        jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/29.png"))); // NOI18N
+        jBAgregar.setToolTipText("Agregar Tratamiento");
 
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/15.png"))); // NOI18N
-        jBModificar.setToolTipText("Modificar Masajista");
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/30.png"))); // NOI18N
+        jBModificar.setToolTipText("Modificar Tratamiento");
 
-        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16.png"))); // NOI18N
-        jBEliminar.setToolTipText("Eliminar Masajista");
+        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/31.png"))); // NOI18N
+        jBEliminar.setToolTipText("Eliminar Tratamiento");
 
         jTMasajista.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

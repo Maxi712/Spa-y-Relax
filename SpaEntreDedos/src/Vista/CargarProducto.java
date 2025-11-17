@@ -29,7 +29,7 @@ import spaentrededos.Masajista;
  *
  * @author Valentin Barros
  */
-public class CargaMasajista extends javax.swing.JInternalFrame {
+public class CargarProducto extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -45,13 +45,13 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     /**
      * Creates new form CargaMasajista
      */
-    public CargaMasajista() {
+    public CargarProducto() {
         initComponents();
-        cambiarTextField(this.jTFMatricula);
+        cambiarTextField(this.jTFCodigo);
         cambiarTextField(this.jTFNombre);
-        cambiarTextField(this.jTFTelefono);
-        estiloComboBox(this.jCBEspecialidad);
-        cargarCombo(this.jCBEspecialidad);
+        cambiarTextField(this.jTFStock);
+        estiloComboBox(this.jCBTipo);
+        cargarCombo(this.jCBTipo);
         armarCabecera();
         cargarDatosTabla();
     }
@@ -68,13 +68,13 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         jPPrincipal = new javax.swing.JPanel();
         jPTitulo = new javax.swing.JPanel();
         jLTitulo = new javax.swing.JLabel();
-        jLMatricula = new javax.swing.JLabel();
-        jTFMatricula = new javax.swing.JTextField();
+        jLCodigo = new javax.swing.JLabel();
+        jTFCodigo = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
         jLNombre = new javax.swing.JLabel();
         jTFNombre = new javax.swing.JTextField();
         jLTelefono = new javax.swing.JLabel();
-        jTFTelefono = new javax.swing.JTextField();
+        jTFStock = new javax.swing.JTextField();
         jLEspecialidad = new javax.swing.JLabel();
         jLEstado = new javax.swing.JLabel();
         jRBEstado = new javax.swing.JRadioButton();
@@ -83,11 +83,11 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         jBEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTMasajista = new javax.swing.JTable();
+        jTProducto = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
-        jCBEspecialidad = new javax.swing.JComboBox<>();
-        jCBEspecialidad1 = new javax.swing.JComboBox<>();
-        jLEspecialidad1 = new javax.swing.JLabel();
+        jCBTipo = new javax.swing.JComboBox<>();
+        jLMarca = new javax.swing.JLabel();
+        jTFMarca = new javax.swing.JTextField();
 
         jPPrincipal.setBackground(new java.awt.Color(249, 246, 238));
 
@@ -96,7 +96,7 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         jLTitulo.setBackground(new java.awt.Color(255, 255, 255));
         jLTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLTitulo.setForeground(new java.awt.Color(168, 213, 186));
-        jLTitulo.setText("Cargar Masajista");
+        jLTitulo.setText("Cargar Producto");
 
         javax.swing.GroupLayout jPTituloLayout = new javax.swing.GroupLayout(jPTitulo);
         jPTitulo.setLayout(jPTituloLayout);
@@ -110,18 +110,18 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         jPTituloLayout.setVerticalGroup(
             jPTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTituloLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLTitulo)
                 .addGap(20, 20, 20))
         );
 
-        jLMatricula.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLMatricula.setForeground(new java.awt.Color(53, 94, 59));
-        jLMatricula.setText("Matricula:");
+        jLCodigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLCodigo.setForeground(new java.awt.Color(53, 94, 59));
+        jLCodigo.setText("Codigo:");
 
-        jTFMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFMatriculaKeyReleased(evt);
+                jTFCodigoKeyReleased(evt);
             }
         });
 
@@ -136,8 +136,13 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
 
         jLNombre.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(53, 94, 59));
-        jLNombre.setText("Nombre y Apellido:");
+        jLNombre.setText("Nombre:");
 
+        jTFNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNombreActionPerformed(evt);
+            }
+        });
         jTFNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFNombreKeyReleased(evt);
@@ -146,17 +151,22 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
 
         jLTelefono.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLTelefono.setForeground(new java.awt.Color(53, 94, 59));
-        jLTelefono.setText("Telefono:");
+        jLTelefono.setText("Stock:");
 
-        jTFTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTFStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFStockActionPerformed(evt);
+            }
+        });
+        jTFStock.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTFTelefonoKeyReleased(evt);
+                jTFStockKeyReleased(evt);
             }
         });
 
         jLEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLEspecialidad.setForeground(new java.awt.Color(53, 94, 59));
-        jLEspecialidad.setText("Especialidad:");
+        jLEspecialidad.setText("Tipo:");
 
         jLEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLEstado.setForeground(new java.awt.Color(53, 94, 59));
@@ -164,31 +174,31 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
 
         jRBEstado.setBackground(new java.awt.Color(249, 246, 238));
 
-        jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/14.png"))); // NOI18N
-        jBAgregar.setToolTipText("Agregar Masajista");
+        jBAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/26.png"))); // NOI18N
+        jBAgregar.setToolTipText("Agregar Producto");
         jBAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAgregarActionPerformed(evt);
             }
         });
 
-        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/15.png"))); // NOI18N
-        jBModificar.setToolTipText("Modificar Masajista");
+        jBModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/27.png"))); // NOI18N
+        jBModificar.setToolTipText("Modificar Producto");
         jBModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBModificarActionPerformed(evt);
             }
         });
 
-        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/16.png"))); // NOI18N
-        jBEliminar.setToolTipText("Eliminar Masajista");
+        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/28.png"))); // NOI18N
+        jBEliminar.setToolTipText("Eliminar Producto");
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEliminarActionPerformed(evt);
             }
         });
 
-        jTMasajista.setModel(new javax.swing.table.DefaultTableModel(
+        jTProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -199,7 +209,7 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTMasajista);
+        jScrollPane1.setViewportView(jTProducto);
 
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit_16560328.png"))); // NOI18N
         jBSalir.setText("Salir");
@@ -209,77 +219,70 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
             }
         });
 
-        jLEspecialidad1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLEspecialidad1.setForeground(new java.awt.Color(53, 94, 59));
-        jLEspecialidad1.setText("Especialidad:");
+        jLMarca.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLMarca.setForeground(new java.awt.Color(53, 94, 59));
+        jLMarca.setText("Marca:");
 
         javax.swing.GroupLayout jPPrincipalLayout = new javax.swing.GroupLayout(jPPrincipal);
         jPPrincipal.setLayout(jPPrincipalLayout);
         jPPrincipalLayout.setHorizontalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPPrincipalLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLNombre)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFNombre))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLEspecialidad)
-                                .addGap(18, 18, 18)
-                                .addComponent(jCBEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                                .addComponent(jLTelefono)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLEstado)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRBEstado)))
-                        .addGap(99, 99, 99))
-                    .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLMatricula)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBBuscar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBSalir)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPPrincipalLayout.createSequentialGroup()
                             .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLNombre)
+                                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                        .addComponent(jLCodigo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jBBuscar))
+                                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                            .addComponent(jLTelefono)
+                                            .addGap(26, 26, 26)
+                                            .addComponent(jTFStock, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLEstado)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jRBEstado))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                                    .addComponent(jLMarca)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jTFMarca))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createSequentialGroup()
+                                                    .addComponent(jLEspecialidad)
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                                 .addGroup(jPPrincipalLayout.createSequentialGroup()
                                     .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jBSalir)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                        .addComponent(jLEspecialidad1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCBEspecialidad1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(92, 92, 92))))
+                                    .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, 29))
         );
         jPPrincipalLayout.setVerticalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPPrincipalLayout.createSequentialGroup()
                 .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLMatricula)
-                        .addComponent(jTFMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLCodigo)
+                        .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNombre)
@@ -287,25 +290,25 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLEspecialidad)
-                    .addComponent(jCBEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRBEstado, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLMarca)
+                    .addComponent(jTFMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTFStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLTelefono)
-                        .addComponent(jTFTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLEstado)))
+                        .addComponent(jLEstado))
+                    .addComponent(jRBEstado))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBModificar)
-                    .addComponent(jBAgregar, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jBAgregar)
+                    .addComponent(jBEliminar))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCBEspecialidad1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLEspecialidad1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -324,7 +327,7 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
@@ -337,29 +340,29 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
-    private void jTFMatriculaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMatriculaKeyReleased
+    private void jTFCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFCodigoKeyReleased
         // TODO add your handling code here:
         Pattern patron = Pattern.compile("[0-9_.]+");
-        String nro = this.jTFMatricula.getText();
+        String nro = this.jTFCodigo.getText();
         Matcher m = patron.matcher(nro);
         if (!m.matches() && nro.length() > 0) {
             JOptionPane.showMessageDialog(this, "No es un numero");
-            this.jTFMatricula.setText(nro.substring(0, nro.length() - 1));
-            this.jTFMatricula.requestFocus();
+            this.jTFCodigo.setText(nro.substring(0, nro.length() - 1));
+            this.jTFCodigo.requestFocus();
         }
-    }//GEN-LAST:event_jTFMatriculaKeyReleased
+    }//GEN-LAST:event_jTFCodigoKeyReleased
 
-    private void jTFTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFTelefonoKeyReleased
+    private void jTFStockKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFStockKeyReleased
         // TODO add your handling code here:
         Pattern patron = Pattern.compile("[0-9_.]+");
-        String nro = this.jTFTelefono.getText();
+        String nro = this.jTFStock.getText();
         Matcher m = patron.matcher(nro);
         if (!m.matches() && nro.length() > 0) {
             JOptionPane.showMessageDialog(this, "No es un numero");
-            this.jTFTelefono.setText(nro.substring(0, nro.length() - 1));
-            this.jTFTelefono.requestFocus();
+            this.jTFStock.setText(nro.substring(0, nro.length() - 1));
+            this.jTFStock.requestFocus();
         }
-    }//GEN-LAST:event_jTFTelefonoKeyReleased
+    }//GEN-LAST:event_jTFStockKeyReleased
 
     private void jTFNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFNombreKeyReleased
         // TODO add your handling code here:
@@ -376,14 +379,14 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
         try {
-            if (!this.jTFMatricula.getText().isEmpty()) {
+            if (!this.jTFCodigo.getText().isEmpty()) {
                 ArrayList<Masajista> masajista = masajistaData.listarMasajista();
                 for (Masajista m : masajista) {
-                    if (m.getMatricula() == Integer.parseInt(this.jTFMatricula.getText())) {
-                        this.jTFMatricula.setText(Integer.toString(m.getMatricula()));
+                    if (m.getMatricula() == Integer.parseInt(this.jTFCodigo.getText())) {
+                        this.jTFCodigo.setText(Integer.toString(m.getMatricula()));
                         this.jTFNombre.setText(m.getNombreApellido());
-                        this.jCBEspecialidad.setSelectedItem(m.getEspecialidad());
-                        this.jTFTelefono.setText(Long.toString(m.getTelefono()));
+                        this.jCBTipo.setSelectedItem(m.getEspecialidad());
+                        this.jTFStock.setText(Long.toString(m.getTelefono()));
                         this.jRBEstado.setSelected(m.isEstado());
                     }
                 }
@@ -399,11 +402,11 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         // TODO add your handling code here:
         try {
-            if (!this.jTFMatricula.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() && !this.jTFTelefono.getText().isEmpty() && this.jCBEspecialidad.getSelectedItem() != null) {
-                int matricula = Integer.parseInt(this.jTFMatricula.getText());
+            if (!this.jTFCodigo.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() && !this.jTFStock.getText().isEmpty() && this.jCBTipo.getSelectedItem() != null) {
+                int matricula = Integer.parseInt(this.jTFCodigo.getText());
                 String nombre = this.jTFNombre.getText();
-                String especialidad = (String) this.jCBEspecialidad.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFTelefono.getText());
+                String especialidad = (String) this.jCBTipo.getSelectedItem();
+                long telefono = Long.parseLong(this.jTFStock.getText());
                 boolean estado = this.jRBEstado.isSelected();
                 Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
                 masajistaData.GuardarMasajista(m);
@@ -420,11 +423,11 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         // TODO add your handling code here:
        try {
-            if (!this.jTFMatricula.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() || !this.jTFTelefono.getText().isEmpty() || this.jCBEspecialidad.getSelectedItem() != null) {
-                int matricula = Integer.parseInt(this.jTFMatricula.getText());
+            if (!this.jTFCodigo.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() || !this.jTFStock.getText().isEmpty() || this.jCBTipo.getSelectedItem() != null) {
+                int matricula = Integer.parseInt(this.jTFCodigo.getText());
                 String nombre = this.jTFNombre.getText();
-                String especialidad = (String) this.jCBEspecialidad.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFTelefono.getText());
+                String especialidad = (String) this.jCBTipo.getSelectedItem();
+                long telefono = Long.parseLong(this.jTFStock.getText());
                 boolean estado = this.jRBEstado.isSelected();
                 Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
                 masajistaData.modificarMasajista(m);
@@ -441,8 +444,8 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         // TODO add your handling code here:
         try{
-            if(!this.jTFMatricula.getText().isEmpty()){
-                int matricula = Integer.parseInt(this.jTFMatricula.getText());
+            if(!this.jTFCodigo.getText().isEmpty()){
+                int matricula = Integer.parseInt(this.jTFCodigo.getText());
                 masajistaData.eliminarMasajista(matricula);
             }
             
@@ -455,6 +458,14 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
+    private void jTFStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFStockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFStockActionPerformed
+
+    private void jTFNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNombreActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
@@ -462,12 +473,11 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<String> jCBEspecialidad;
-    private javax.swing.JComboBox<String> jCBEspecialidad1;
+    private javax.swing.JComboBox<String> jCBTipo;
+    private javax.swing.JLabel jLCodigo;
     private javax.swing.JLabel jLEspecialidad;
-    private javax.swing.JLabel jLEspecialidad1;
     private javax.swing.JLabel jLEstado;
-    private javax.swing.JLabel jLMatricula;
+    private javax.swing.JLabel jLMarca;
     private javax.swing.JLabel jLNombre;
     private javax.swing.JLabel jLTelefono;
     private javax.swing.JLabel jLTitulo;
@@ -476,10 +486,11 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRBEstado;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTFMatricula;
+    private javax.swing.JTextField jTFCodigo;
+    private javax.swing.JTextField jTFMarca;
     private javax.swing.JTextField jTFNombre;
-    private javax.swing.JTextField jTFTelefono;
-    private javax.swing.JTable jTMasajista;
+    private javax.swing.JTextField jTFStock;
+    private javax.swing.JTable jTProducto;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarTextField(JTextField campo) {
@@ -508,19 +519,20 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
     }
 
     private void armarCabecera() {
-        modelo.addColumn("Matricula");
-        modelo.addColumn("Nombre Apellido");
-        modelo.addColumn("Especialidad");
-        modelo.addColumn("Telefono");
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Marca");
+        modelo.addColumn("Stock");
         modelo.addColumn("Estado");
-        jTMasajista.setModel(modelo);
+        jTProducto.setModel(modelo);
     }
 
     private void limpiarCampos() {
-        this.jTFMatricula.setText("");
+        this.jTFCodigo.setText("");
         this.jTFNombre.setText("");
-        this.jCBEspecialidad.setSelectedItem(null);
-        this.jTFTelefono.setText("");
+        this.jCBTipo.setSelectedItem(null);
+        this.jTFStock.setText("");
         this.jRBEstado.setSelected(false);
     }
     

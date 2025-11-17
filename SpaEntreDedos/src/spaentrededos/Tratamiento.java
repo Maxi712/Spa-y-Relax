@@ -15,6 +15,11 @@ public class Tratamiento {
     private boolean estado;
     private int totalSesiones;
 
+    public Tratamiento() {
+    }
+
+    
+    
     public Tratamiento(int codTratam, String nombre, String tipo, String detalle, List<Producto> productos, LocalTime duracion, double costo, boolean estado) {
         this.codTratam = codTratam;
         this.nombre = nombre;
@@ -25,6 +30,20 @@ public class Tratamiento {
         this.costo = costo;
         this.estado = estado;
     }
+
+    public Tratamiento(String nombre, String tipo, String detalle, List<Producto> productos, LocalTime duracion, double costo, boolean estado, int totalSesiones) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.detalle = detalle;
+        this.productos = productos;
+        this.duracion = duracion;
+        this.costo = costo;
+        this.estado = estado;
+        this.totalSesiones = totalSesiones;
+    }
+    
+    
+    
 public Tratamiento(int codTratam, String nombre, String tipo, int totalSesiones){
     this.codTratam = codTratam;
     this.nombre = nombre;
