@@ -5,11 +5,19 @@
  */
 package Vista;
 
+import Persistencia.InstalacionData;
 import Persistencia.MasajistaData;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +31,9 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import spaentrededos.Instalacion;
 import spaentrededos.Masajista;
+import spaentrededos.Sesion;
 
 /**
  *
@@ -40,7 +50,8 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
     private String[] especialidaes = {"Facial", "Corporal", "Relajacion", "Estetico"};
 
     private MasajistaData masajistaData = new MasajistaData();
-
+    InstalacionData insData=new InstalacionData();
+    ArrayList<Sesion> listat =new ArrayList();
     //private MasajistaData masajistaData = new MasajistaData();
     /**
      * Creates new form CargaMasajista
@@ -49,7 +60,9 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
         initComponents();
         cambiarTextField(this.jTFHora1);
         cambiarTextField(this.jTFHora2);
-        cargarDatosTabla();
+        armarCabecera();
+        cargarTabla();
+        HoraInstalaciones();
     }
 
     /**
@@ -61,6 +74,8 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jSpinField1 = new com.toedter.components.JSpinField();
         jPPrincipal = new javax.swing.JPanel();
         jPTitulo = new javax.swing.JPanel();
         jLTitulo = new javax.swing.JLabel();
@@ -71,6 +86,11 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTInstalacionesLibres = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+
+        jLabel1.setText("jLabel1");
 
         jPPrincipal.setBackground(new java.awt.Color(249, 246, 238));
 
@@ -98,6 +118,11 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20))
         );
 
+        jTFHora1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFHora1FocusLost(evt);
+            }
+        });
         jTFHora1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTFHora1KeyReleased(evt);
@@ -108,6 +133,11 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
         jLHoraio.setForeground(new java.awt.Color(53, 94, 59));
         jLHoraio.setText("Intalacion libre de:");
 
+        jTFHora2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFHora2FocusLost(evt);
+            }
+        });
         jTFHora2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFHora2ActionPerformed(evt);
@@ -144,39 +174,63 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setForeground(new java.awt.Color(53, 94, 59));
+        jLabel2.setText("Fecha:");
+
+        jToggleButton1.setText("Instalacion Libre");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPPrincipalLayout = new javax.swing.GroupLayout(jPPrincipal);
         jPPrincipal.setLayout(jPPrincipalLayout);
         jPPrincipalLayout.setHorizontalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPPrincipalLayout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jLHoraio)
-                .addGap(18, 18, 18)
-                .addComponent(jTFHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLA)
-                .addGap(18, 18, 18)
-                .addComponent(jTFHora2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBSalir)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jToggleButton1))
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addComponent(jLHoraio)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFHora1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLA)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFHora2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67))
         );
         jPPrincipalLayout.setVerticalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPPrincipalLayout.createSequentialGroup()
                 .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFHora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLHoraio)
-                    .addComponent(jLA)
-                    .addComponent(jTFHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(36, 36, 36)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTFHora1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLHoraio)
+                        .addComponent(jLA)
+                        .addComponent(jTFHora2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(jToggleButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jBSalir)
@@ -208,8 +262,19 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jTFHora1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFHora1KeyReleased
-        // TODO add your handling code here:
-        Pattern patron = Pattern.compile("[0-9_.]+");
+
+    }//GEN-LAST:event_jTFHora1KeyReleased
+
+    private void jTFHora2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFHora2KeyReleased
+
+    }//GEN-LAST:event_jTFHora2KeyReleased
+
+    private void jTFHora2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFHora2ActionPerformed
+        insLibre();
+    }//GEN-LAST:event_jTFHora2ActionPerformed
+
+    private void jTFHora1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFHora1FocusLost
+        Pattern patron = Pattern.compile("([01]?[0-9]|2[0-3]):[0-5][0-9]");
         String nro = this.jTFHora1.getText();
         Matcher m = patron.matcher(nro);
         if (!m.matches() && nro.length() > 0) {
@@ -217,36 +282,40 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
             this.jTFHora1.setText(nro.substring(0, nro.length() - 1));
             this.jTFHora1.requestFocus();
         }
-    }//GEN-LAST:event_jTFHora1KeyReleased
+    }//GEN-LAST:event_jTFHora1FocusLost
 
-    private void jTFHora2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFHora2KeyReleased
-        // TODO add your handling code here:
-        Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
+    private void jTFHora2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFHora2FocusLost
+       Pattern patron = Pattern.compile("([01]?[0-9]|2[0-3]):[0-5][0-9]");
         String nro = this.jTFHora2.getText();
         Matcher m = patron.matcher(nro);
         if (!m.matches() && nro.length() > 0) {
-            JOptionPane.showMessageDialog(this, "No es una letra");
+            JOptionPane.showMessageDialog(this, "No es un numero");
             this.jTFHora2.setText(nro.substring(0, nro.length() - 1));
             this.jTFHora2.requestFocus();
         }
-    }//GEN-LAST:event_jTFHora2KeyReleased
+    }//GEN-LAST:event_jTFHora2FocusLost
 
-    private void jTFHora2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFHora2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFHora2ActionPerformed
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        insLibre();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBSalir;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLA;
     private javax.swing.JLabel jLHoraio;
     private javax.swing.JLabel jLTitulo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPPrincipal;
     private javax.swing.JPanel jPTitulo;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.components.JSpinField jSpinField1;
     private javax.swing.JTextField jTFHora1;
     private javax.swing.JTextField jTFHora2;
     private javax.swing.JTable jTInstalacionesLibres;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarTextField(JTextField campo) {
@@ -274,15 +343,90 @@ public class ListarInstalacionesLibres extends javax.swing.JInternalFrame {
        
     }
     
-    private void cargarDatosTabla(){
-        ArrayList<Masajista> masajista = masajistaData.listarMasajista();
-        for(Masajista m : masajista){
-            if(m.isEstado()== true){
-                modelo.addRow(new Object[]{m.getMatricula(), m.getNombreApellido(), m.getEspecialidad(), m.getTelefono(), "Activo"});
+    private void cargarTabla(){
+        ArrayList<Instalacion>lins=new ArrayList();
+        lins=insData.listarInstalaciones();
+        for (Instalacion i : lins) {
+            if(i.isEstado()==true){
+            modelo.addRow(new Object[]{i.getCodInstal(),i.getNombre(),i.getDetalleUso(),i.getPrecio30M(),"activo"});
             }else{
-                modelo.addRow(new Object[]{m.getMatricula(), m.getNombreApellido(), m.getEspecialidad(), m.getTelefono(), "Inactivo"});
+                modelo.addRow(new Object[]{i.getCodInstal(),i.getNombre(),i.getDetalleUso(),i.getPrecio30M(),"inactivo"});
+            }
+        }
+        
+    }
+
+     private void insLibre (){
+         try{
+        //Date fechas=(Date) jDateChooser1.getDate();
+        //LocalDate fecha=fechas.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        DateTimeFormatter f=DateTimeFormatter.ofPattern("H:mm");
+        LocalTime horati=LocalTime.parse(jTFHora1.getText(), f);
+        LocalTime horatf=LocalTime.parse(jTFHora1.getText(), f);
+        ArrayList<Instalacion>inslista=(ArrayList<Instalacion>) insData.listarInstalacionesLibresHora(horati, horatf);
+        
+        ArrayList<Instalacion> fil=new ArrayList();
+        for(Instalacion i: inslista){
+            boolean c = false;
+            for(Sesion s:listat){
+                LocalTime horai=s.getFechaHoraInicio().toLocalTime();
+                LocalTime horaf=s.getFechaHoraFin().toLocalTime();
+                
+                if(horai.equals(horati)&&horaf.equals(horatf)){
+                    c=true;
+                    break;
+                }
+            }
+            if(c){
+                fil.add(i);
+            }
+        }
+        if(fil.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No hay instalacion libre");
+        }else{
+            for(Instalacion i:fil){
+                   modelo.addRow(new Object[]{i.getCodInstal(),i.getNombre(),i.getDetalleUso(),i.getPrecio30M(),"activo"});
+        }
+
+            }
+        }catch(DateTimeParseException e){
+            JOptionPane.showMessageDialog(this, "Formato de hora invalido");
+        
+         }
+    }
+    
+    private void HoraInstalaciones (){
+        ArrayList<Instalacion>hlista=new ArrayList();
+        hlista=insData.listarInstalaciones();
+        
+        for (Instalacion i: hlista) {
+            if(i.getCodInstal()==1){
+                Sesion bañot=new Sesion(LocalDateTime.of(2025, 11, 18, 9, 0),LocalDateTime.of(2025, 11, 18, 10, 0),i);
+                listat.add(bañot);
+            }else if(i.getCodInstal()==2){
+                Sesion ducha=new Sesion(LocalDateTime.of(2025, 11, 18, 10, 0),LocalDateTime.of(2025, 11, 18, 11, 0),i);
+                listat.add(ducha);
+            }else if(i.getCodInstal()==3){
+                Sesion hidro=new Sesion(LocalDateTime.of(2025, 11, 18, 11, 0),LocalDateTime.of(2025, 11, 18, 12, 0),i);
+                listat.add(hidro);
+            }else if(i.getCodInstal()==4){
+                Sesion jacuzzi=new Sesion(LocalDateTime.of(2025, 11, 18, 12, 0),LocalDateTime.of(2025, 11, 18, 13, 0),i);
+                listat.add(jacuzzi);
+            }else if(i.getCodInstal()==5){
+                Sesion piscina=new Sesion(LocalDateTime.of(2025, 11, 18, 13, 0),LocalDateTime.of(2025, 11, 18, 14, 0),i);
+                listat.add(piscina);
+            }else if(i.getCodInstal()==6){
+                Sesion sauna=new Sesion(LocalDateTime.of(2025, 11, 18, 14, 0),LocalDateTime.of(2025, 11, 18, 15, 0),i);
+                listat.add(sauna);
+            }else if(i.getCodInstal()==7){
+                Sesion zrelax=new Sesion(LocalDateTime.of(2025, 11, 18, 15, 0),LocalDateTime.of(2025, 11, 18, 16, 0),i);
+                listat.add(zrelax);
             }
         }
     }
 
 }
+
+
+
+
