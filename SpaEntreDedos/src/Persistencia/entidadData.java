@@ -37,7 +37,7 @@ public class entidadData {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, c.getDni());
             ps.setString(2, c.getNombreCompleto());
-            ps.setInt(3, c.getTelefono());
+            ps.setString(3, c.getTelefono());
             ps.setInt(4, c.getEdad());
             ps.setString(5, c.getAfecciones());
             ps.setBoolean(6, c.isEstado());
@@ -68,7 +68,7 @@ public class entidadData {
               int codCli = rs.getInt("codCli");
               int dni = rs.getInt("dni");
               String nombreCompleto = rs.getString("nombreCompleto");
-              int telefono = rs.getInt("telefono");
+              String telefono = rs.getString("telefono");
               int edad=rs.getInt("edad");
               String afecciones = rs.getString("afecciones");
               boolean estado = rs.getBoolean("estado");
@@ -97,7 +97,7 @@ public class entidadData {
                 c.setCodCli(rs.getInt("codCli"));
                 c.setDni(rs.getInt("dni"));
                 c.setNombreCompleto(rs.getString("nombreCompleto"));
-                c.setTelefono(rs.getInt("telefono"));
+                c.setTelefono(rs.getString("telefono"));
                 c.setEdad(rs.getInt("edad"));
                 c.setAfecciones(rs.getString("afecciones"));
                 c.setEstado(rs.getBoolean("estado"));
@@ -120,7 +120,7 @@ public class entidadData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, c.getDni());
             ps.setString(2, c.getNombreCompleto());
-            ps.setInt(3, c.getTelefono());
+            ps.setString(3, c.getTelefono());
             ps.setInt(4, c.getEdad());
             ps.setString(5, c.getAfecciones());
             ps.setBoolean(6, c.isEstado());
