@@ -42,12 +42,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMICliente = new javax.swing.JMenuItem();
         jMMasajista = new javax.swing.JMenu();
         jMIMasajista = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMIHorarios = new javax.swing.JMenuItem();
         jMSpa = new javax.swing.JMenu();
         jMICTratamiento = new javax.swing.JMenuItem();
+        jMIInforme = new javax.swing.JMenuItem();
         jMInstalaciones = new javax.swing.JMenu();
         jMICConsultorio = new javax.swing.JMenuItem();
         jMICInstalaciones = new javax.swing.JMenuItem();
+        jMIILibre = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
         jMISalir = new javax.swing.JMenuItem();
 
@@ -88,13 +90,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMMasajista.add(jMIMasajista);
 
-        jMenuItem1.setText("Horarios de Masajista");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMIHorarios.setText("Horarios de Masajista");
+        jMIHorarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMIHorariosActionPerformed(evt);
             }
         });
-        jMMasajista.add(jMenuItem1);
+        jMMasajista.add(jMIHorarios);
 
         jMBMenu.add(jMMasajista);
 
@@ -108,6 +110,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMSpa.add(jMICTratamiento);
+
+        jMIInforme.setText("Informe Dia de Spa");
+        jMIInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIInformeActionPerformed(evt);
+            }
+        });
+        jMSpa.add(jMIInforme);
 
         jMBMenu.add(jMSpa);
 
@@ -129,6 +139,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMInstalaciones.add(jMICInstalaciones);
+
+        jMIILibre.setText("Instalaciones Libres");
+        jMIILibre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIILibreActionPerformed(evt);
+            }
+        });
+        jMInstalaciones.add(jMIILibre);
 
         jMBMenu.add(jMInstalaciones);
 
@@ -208,15 +226,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMICTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICTratamientoActionPerformed
         // TODO add your handling code here:
-        escritorio.removeAll();
+        /*escritorio.removeAll();
         escritorio.repaint();
         CargarTratamiento form = new CargarTratamiento();
         form.setVisible(true);
         escritorio.add(form);
-        escritorio.moveToFront(form);
+        escritorio.moveToFront(form);*/
     }//GEN-LAST:event_jMICTratamientoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMIHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIHorariosActionPerformed
         // TODO add your handling code here:
         escritorio.removeAll();
         escritorio.repaint();
@@ -224,7 +242,27 @@ public class MenuPrincipal extends javax.swing.JFrame {
         form.setVisible(true);
         escritorio.add(form);
         escritorio.moveToFront(form);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMIHorariosActionPerformed
+
+    private void jMIILibreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIILibreActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        ListarInstalacionesLibres form = new ListarInstalacionesLibres();
+        form.setVisible(true);
+        escritorio.add(form);
+        escritorio.moveToFront(form);
+    }//GEN-LAST:event_jMIILibreActionPerformed
+
+    private void jMIInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIInformeActionPerformed
+        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        ListarInformes form = new ListarInformes();
+        form.setVisible(true);
+        escritorio.add(form);
+        escritorio.moveToFront(form);
+    }//GEN-LAST:event_jMIInformeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,13 +307,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMICInstalaciones;
     private javax.swing.JMenuItem jMICTratamiento;
     private javax.swing.JMenuItem jMICliente;
+    private javax.swing.JMenuItem jMIHorarios;
+    private javax.swing.JMenuItem jMIILibre;
+    private javax.swing.JMenuItem jMIInforme;
     private javax.swing.JMenuItem jMIMasajista;
     private javax.swing.JMenuItem jMISalir;
     private javax.swing.JMenu jMInstalaciones;
     private javax.swing.JMenu jMMasajista;
     private javax.swing.JMenu jMSalir;
     private javax.swing.JMenu jMSpa;
-    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 
 public class FondoDesktopPane extends JDesktopPane {
