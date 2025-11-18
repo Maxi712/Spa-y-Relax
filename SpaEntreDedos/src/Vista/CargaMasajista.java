@@ -471,6 +471,7 @@ public class CargaMasajista extends javax.swing.JInternalFrame {
         try{
             String especialidad = (String) this.jCBEspecialidad1.getSelectedItem();
             ArrayList<Masajista> masajista= masajistaData.buscarPorEspecialidad(especialidad);
+            modelo.setRowCount(0);
             cargarDatosTabla(masajista);
         }catch(NumberFormatException ex){
             System.out.println(ex.getLocalizedMessage());

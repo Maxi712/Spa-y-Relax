@@ -5,10 +5,12 @@
  */
 package Vista;
 
+import Persistencia.ProductoData;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -18,6 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import spaentrededos.Producto;
 
 /**
  *
@@ -31,14 +34,22 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
             return false;
         }
     };
+     private DefaultTableModel modelo1 = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
     private String[] nombre = {"Masajes", "Tratamiento Corporal", "Tratamiento Faciales", "Tratamiento Esteticos", "Tratamiento Relajacion"};
     private String [] masajes = {"Masaje Sueco", "Masaje de Tejido Profundo", "Masaje con Piedras Calientes", "Masajes Especializados"};
     private String[] corporal = {"Exfoliacion Corporal", "Envolturas Corporales", "Hidroterapia", "Vacumterapia"};
     private String[] faciales = {"Facial Basico", "Faciales Aavnzados", "Microdermoabrasion", "Radiofrecuencia", "Ultrasonido", "Luz Pulsada Intensa", "Vaporizador Facial"};
     private String[] esteticos = {"Manicura y Pedicura", "Depilacion", "Perfilado de Cejas"};
-    private String[] relajacion = {"Circuito de aguas", "Aromaterapia", "Musicoterapia", "Terapias con aceites esenciales"};        
+    private String[] relajacion = {"Circuito de aguas", "Aromaterapia", "Musicoterapia", "Terapias con aceites esenciales"};  
     private String [] duracionT = {"15", "30", "45", "60", "90", "120"};
+    private ArrayList<Producto> producto = new ArrayList();
     
+    ProductoData pd = new ProductoData();
     
     /**
      * Creates new form CargaMasajista
@@ -57,6 +68,8 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         cargarCombo(this.jCBDuracion, duracionT);
         cargarCombo(this.jCBTipo1, nombre);
         armarCabecera();
+        armarCabeceraProducto();
+        datosTablaProducto(pd.listarProducto());
     }
 
     /**
@@ -86,7 +99,7 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         jBEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTMasajista = new javax.swing.JTable();
+        jTTratamiento = new javax.swing.JTable();
         jBSalir = new javax.swing.JButton();
         jCBNombre = new javax.swing.JComboBox<>();
         jCBTipo = new javax.swing.JComboBox<>();
@@ -99,6 +112,13 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jCBTipo1 = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTProductos = new javax.swing.JTable();
+        jRBProductos = new javax.swing.JRadioButton();
+        jRRAgregados = new javax.swing.JRadioButton();
+        jRBNAgregados = new javax.swing.JRadioButton();
+        jBAProducto = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jPPrincipal.setBackground(new java.awt.Color(249, 246, 238));
 
@@ -114,16 +134,16 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         jPTituloLayout.setHorizontalGroup(
             jPTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPTituloLayout.createSequentialGroup()
-                .addGap(156, 156, 156)
+                .addGap(268, 268, 268)
                 .addComponent(jLTitulo)
-                .addGap(156, 156, 156))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPTituloLayout.setVerticalGroup(
             jPTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPTituloLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+            .addGroup(jPTituloLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addComponent(jLTitulo)
-                .addGap(20, 20, 20))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLCoddigo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -161,7 +181,7 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/31.png"))); // NOI18N
         jBEliminar.setToolTipText("Eliminar Tratamiento");
 
-        jTMasajista.setModel(new javax.swing.table.DefaultTableModel(
+        jTTratamiento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -172,7 +192,7 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTMasajista);
+        jScrollPane1.setViewportView(jTTratamiento);
 
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit_16560328.png"))); // NOI18N
         jBSalir.setText("Salir");
@@ -208,78 +228,137 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(53, 94, 59));
         jLabel1.setText("Tipo:");
 
+        jTProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTProductos);
+
+        jRBProductos.setBackground(new java.awt.Color(249, 246, 238));
+        jRBProductos.setText("Todos los productos");
+        jRBProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBProductosActionPerformed(evt);
+            }
+        });
+
+        jRRAgregados.setBackground(new java.awt.Color(249, 246, 238));
+        jRRAgregados.setText("Productos Agregados");
+        jRRAgregados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRRAgregadosActionPerformed(evt);
+            }
+        });
+
+        jRBNAgregados.setBackground(new java.awt.Color(249, 246, 238));
+        jRBNAgregados.setText("Productos no Agregados");
+        jRBNAgregados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBNAgregadosActionPerformed(evt);
+            }
+        });
+
+        jBAProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/26.png"))); // NOI18N
+        jBAProducto.setToolTipText("Agregar Producto");
+        jBAProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAProductoActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/28.png"))); // NOI18N
+        jButton2.setToolTipText("Eliminar Porducto");
+
         javax.swing.GroupLayout jPPrincipalLayout = new javax.swing.GroupLayout(jPPrincipal);
         jPPrincipal.setLayout(jPPrincipalLayout);
         jPPrincipalLayout.setHorizontalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 536, Short.MAX_VALUE)
+            .addComponent(jPTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPPrincipalLayout.createSequentialGroup()
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jBSalir)
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addGap(52, 52, 52)
                         .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createSequentialGroup()
+                                    .addComponent(jLDetalle)
+                                    .addGap(39, 39, 39)
+                                    .addComponent(jTFDetalle))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createSequentialGroup()
+                                    .addComponent(jLTipo)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                .addGap(112, 112, 112)
                                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                                .addComponent(jLNombre)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jCBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                                .addComponent(jLTipo)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                                .addComponent(jLCoddigo)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jBBuscar)))
-                                        .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                            .addComponent(jLDetalle)
-                                            .addGap(39, 39, 39)
-                                            .addComponent(jTFDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel3))
-                                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrincipalLayout.createSequentialGroup()
-                                            .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                                    .addComponent(jLCSesiones)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jTFSesiones, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jLEstado)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jRBEstado))
-                                                .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                                    .addComponent(jLCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jTFCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jLDuracion)
-                                                    .addGap(18, 18, 18)
-                                                    .addComponent(jCBDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                        .addComponent(jLNombre)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                        .addComponent(jLCoddigo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jBBuscar)))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createSequentialGroup()
+                                        .addComponent(jLCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTFCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLDuracion)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCBDuracion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPPrincipalLayout.createSequentialGroup()
+                                        .addComponent(jLCSesiones)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTFSesiones, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLEstado)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRBEstado))))
                             .addGroup(jPPrincipalLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                        .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jRBProductos)
+                                            .addComponent(jRRAgregados)
+                                            .addComponent(jRBNAgregados))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jBAProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPPrincipalLayout.createSequentialGroup()
-                        .addGap(169, 169, 169)
+                        .addGap(217, 217, 217)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jCBTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jCBTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBSalir)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPPrincipalLayout.setVerticalGroup(
             jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,14 +366,29 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
                 .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLCoddigo)
-                        .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLNombre)
-                    .addComponent(jCBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLCoddigo)
+                                .addComponent(jTFCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLNombre)
+                            .addComponent(jCBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTFCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLCosto)
+                            .addComponent(jLDuracion)
+                            .addComponent(jCBDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLCSesiones)
+                                .addComponent(jTFSesiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLEstado))
+                            .addComponent(jRBEstado))))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLTipo)
@@ -305,19 +399,19 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
                     .addComponent(jTFDetalle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(53, 53, 53)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLCosto)
-                    .addComponent(jLDuracion)
-                    .addComponent(jCBDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLCSesiones)
-                        .addComponent(jTFSesiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLEstado))
-                    .addComponent(jRBEstado))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addComponent(jRBProductos)
+                        .addGap(4, 4, 4)
+                        .addComponent(jRRAgregados)
+                        .addGap(6, 6, 6)
+                        .addComponent(jRBNAgregados))
+                    .addGroup(jPPrincipalLayout.createSequentialGroup()
+                        .addComponent(jBAProducto)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
                 .addGap(18, 18, 18)
                 .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jBModificar)
@@ -325,15 +419,15 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
                     .addComponent(jBAgregar))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jCBTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBSalir)
-                .addGap(25, 25, 25))
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCBTipo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBSalir))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -386,14 +480,61 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCBNombreActionPerformed
 
+    private void jRBProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBProductosActionPerformed
+        // TODO add your handling code here:
+        modelo1.setRowCount(0);
+        this.jRRAgregados.setSelected(false);
+        this.jRBNAgregados.setSelected(false);
+        if(this.jRBProductos.isSelected()){
+            datosTablaProducto(pd.listarProducto());
+        }
+    }//GEN-LAST:event_jRBProductosActionPerformed
 
+    private void jRRAgregadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRRAgregadosActionPerformed
+        // TODO add your handling code here:
+        modelo1.setRowCount(0);
+        this.jRBProductos.setSelected(false);
+        this.jRBNAgregados.setSelected(false);
+        if(this.jRRAgregados.isSelected()){
+            datosTablaProducto(producto);
+        }
+    }//GEN-LAST:event_jRRAgregadosActionPerformed
+
+    private void jRBNAgregadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBNAgregadosActionPerformed
+        // TODO add your handling code here:
+        modelo1.setRowCount(0);
+        this.jRBProductos.setSelected(false);
+        this.jRBNAgregados.setSelected(false);
+        if(this.jRRAgregados.isSelected()){
+            datosTablaProducto(producto);
+        }
+    }//GEN-LAST:event_jRBNAgregadosActionPerformed
+
+    private void jBAProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAProductoActionPerformed
+        // TODO add your handling code here:
+        int  [] filas = this.jTProductos.getSelectedRows();
+        for(int f : filas){
+            if(f!=-1){
+                int idProducto = Integer.parseInt(this.jTProductos.getValueAt(f,0).toString());
+                String nombre = this.jTProductos.getValueAt(f,1).toString();
+                String tipo = this.jTProductos.getValueAt(f,2).toString();
+                String marca = this.jTProductos.getValueAt(f,3).toString();
+                int stock = Integer.parseInt(this.jTProductos.getValueAt(f,4).toString());
+                boolean estado = (Boolean) this.jTProductos.getValueAt(f,5);
+            }
+        }
+    }//GEN-LAST:event_jBAProductoActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBAProducto;
     private javax.swing.JButton jBAgregar;
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jBModificar;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCBDuracion;
     private javax.swing.JComboBox<String> jCBNombre;
     private javax.swing.JComboBox<String> jCBTipo;
@@ -412,13 +553,18 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPPrincipal;
     private javax.swing.JPanel jPTitulo;
     private javax.swing.JRadioButton jRBEstado;
+    private javax.swing.JRadioButton jRBNAgregados;
+    private javax.swing.JRadioButton jRBProductos;
+    private javax.swing.JRadioButton jRRAgregados;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTFCodigo;
     private javax.swing.JTextField jTFCosto;
     private javax.swing.JTextField jTFDetalle;
     private javax.swing.JTextField jTFSesiones;
-    private javax.swing.JTable jTMasajista;
+    private javax.swing.JTable jTProductos;
+    private javax.swing.JTable jTTratamiento;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarTextField(JTextField campo) {
@@ -448,12 +594,35 @@ public class CargarTratamiento extends javax.swing.JInternalFrame {
     }
 
     private void armarCabecera() {
-        modelo.addColumn("Matricula");
-        modelo.addColumn("Nombre Apellido");
-        modelo.addColumn("Especialidad");
-        modelo.addColumn("Telefono");
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Detalle");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Costo");
+        modelo.addColumn("Duracion");
+        modelo.addColumn("Cant. Sesiones");
         modelo.addColumn("Estado");
-        jTMasajista.setModel(modelo);
+        jTTratamiento.setModel(modelo);
     }
     
+    private void armarCabeceraProducto(){
+        modelo1.addColumn("idProducto");
+        modelo1.addColumn("Nombre");
+        modelo1.addColumn("Tipo");
+        modelo1.addColumn("Marca");
+        modelo1.addColumn("Stock");
+        modelo1.addColumn("Estado");
+        this.jTProductos.setModel(modelo1);
+    }
+    
+    private void datosTablaProducto(ArrayList<Producto> producto){
+        for(Producto p:producto){
+            if(p.isEstado()== true){
+                modelo.addRow(new Object[]{p.getIdProducto(), p.getNombre(), p.getTipo(), p.getMarca(), p.getStock(), "Activo"});
+            }else{
+                modelo.addRow(new Object[]{p.getIdProducto(), p.getNombre(), p.getTipo(), p.getMarca(), p.getStock(), "Inactivo"});
+            }
+        }
+    }
 }

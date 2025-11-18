@@ -24,7 +24,7 @@ import spaentrededos.Producto;
 public class ProductoData {
     private Connection conexion;
 
-    public ProductoData(Connection conexion) {
+    public ProductoData() {
         this.conexion = Conexion.getConexion();
     }
     

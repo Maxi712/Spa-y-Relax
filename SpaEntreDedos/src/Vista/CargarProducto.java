@@ -39,7 +39,7 @@ public class CargarProducto extends javax.swing.JInternalFrame {
 
     public CargarProducto() {
         initComponents();
-        productoData = new ProductoData(Conexion.getConexion());
+        productoData = new ProductoData();
 
    
 
