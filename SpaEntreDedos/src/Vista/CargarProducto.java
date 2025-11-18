@@ -5,10 +5,9 @@
  */
 package Vista;
 
-import Persistencia.MasajistaData;
+import Modelo.Conexion;
+import Persistencia.ProductoData;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -16,14 +15,10 @@ import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import spaentrededos.Masajista;
+import spaentrededos.Producto;
 
 /**
  *
@@ -37,16 +32,15 @@ public class CargarProducto extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    private String[] especialidaes = {"Facial", "Corporal", "Relajacion", "Estetico"};
 
-    private MasajistaData masajistaData = new MasajistaData();
+    private ProductoData productoData;
 
-    //private MasajistaData masajistaData = new MasajistaData();
-    /**
-     * Creates new form CargaMasajista
-     */
     public CargarProducto() {
         initComponents();
+        productoData = new ProductoData(Conexion.getConexion());
+
+   
+
         cambiarTextField(this.jTFCodigo);
         cambiarTextField(this.jTFNombre);
         cambiarTextField(this.jTFStock);
@@ -378,84 +372,119 @@ public class CargarProducto extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         // TODO add your handling code here:
-        try {
-            if (!this.jTFCodigo.getText().isEmpty()) {
-                ArrayList<Masajista> masajista = masajistaData.listarMasajista();
-                for (Masajista m : masajista) {
-                    if (m.getMatricula() == Integer.parseInt(this.jTFCodigo.getText())) {
-                        this.jTFCodigo.setText(Integer.toString(m.getMatricula()));
-                        this.jTFNombre.setText(m.getNombreApellido());
-                        this.jCBTipo.setSelectedItem(m.getEspecialidad());
-                        this.jTFStock.setText(Long.toString(m.getTelefono()));
-                        this.jRBEstado.setSelected(m.isEstado());
-                    }
-                }
+      try {
+        if (!this.jTFCodigo.getText().isEmpty()) {
+            
+            int id = Integer.parseInt(jTFCodigo.getText());
+
+            Producto p = productoData.buscarPorId(id);
+
+            if (p != null) {  // PRIMERO esto
+                jTFCodigo.setText(String.valueOf(p.getIdProducto()));
+                jTFNombre.setText(p.getNombre());
+                jCBTipo.setSelectedItem(p.getTipo());
+                jTFMarca.setText(p.getMarca());
+                jTFStock.setText(String.valueOf(p.getStock()));
+                jRBEstado.setSelected(p.isEstado());
             } else {
-                JOptionPane.showMessageDialog(this, "El campo Matricula esta vacio");
+                JOptionPane.showMessageDialog(this, "No se encontró un producto con ese ID");
             }
-        } catch (NumberFormatException ex) {
-            System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+
+        } else {
+            JOptionPane.showMessageDialog(this, "El campo Código está vacío");
         }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(null, "Número no válido: " + ex.getMessage());
+    }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
         // TODO add your handling code here:
         try {
-            if (!this.jTFCodigo.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() && !this.jTFStock.getText().isEmpty() && this.jCBTipo.getSelectedItem() != null) {
-                int matricula = Integer.parseInt(this.jTFCodigo.getText());
+            if (!this.jTFCodigo.getText().isEmpty()   && !this.jTFNombre.getText().isEmpty() && !this.jTFStock.getText().isEmpty()                 && this.jCBTipo.getSelectedItem() != null) {
+
+                int id = Integer.parseInt(this.jTFCodigo.getText());
                 String nombre = this.jTFNombre.getText();
-                String especialidad = (String) this.jCBTipo.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFStock.getText());
+                String tipo = (String) this.jCBTipo.getSelectedItem();
+                int stock = Integer.parseInt(this.jTFStock.getText());
                 boolean estado = this.jRBEstado.isSelected();
-                Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
-                masajistaData.GuardarMasajista(m);
+
+                Producto p = new Producto(id, nombre, tipo, stock, estado);
+                productoData.guardarProducto(p);
+
+                limpiarCampos();
+                modelo.setRowCount(0);
+                cargarDatosTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Faltan completar campos");
             }
-            limpiarCampos();
-            modelo.setRowCount(0);
-            cargarDatosTabla();
+
         } catch (NumberFormatException ex) {
-            System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Número no válido: " + ex.getMessage());
         }
+    
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         // TODO add your handling code here:
-       try {
-            if (!this.jTFCodigo.getText().isEmpty() && !this.jTFNombre.getText().isEmpty() || !this.jTFStock.getText().isEmpty() || this.jCBTipo.getSelectedItem() != null) {
-                int matricula = Integer.parseInt(this.jTFCodigo.getText());
-                String nombre = this.jTFNombre.getText();
-                String especialidad = (String) this.jCBTipo.getSelectedItem();
-                long telefono = Long.parseLong(this.jTFStock.getText());
-                boolean estado = this.jRBEstado.isSelected();
-                Masajista m = new Masajista(matricula, nombre, telefono, especialidad, estado);
-                masajistaData.modificarMasajista(m);
+        
+            try {
+                if (!jTFCodigo.getText().isEmpty()
+                        && !jTFNombre.getText().isEmpty()
+                        && !jTFStock.getText().isEmpty()
+                        && jCBTipo.getSelectedItem() != null) {
+
+                    int id = Integer.parseInt(jTFCodigo.getText());
+                    String nombre = jTFNombre.getText();
+                    String tipo = (String) jCBTipo.getSelectedItem();
+                    String marca = jTFMarca.getText();
+                    int stock = Integer.parseInt(jTFStock.getText());
+                    boolean estado = jRBEstado.isSelected();
+
+                    // Usamos el constructor SIN ID porque se genera automáticamente
+                    Producto p = new Producto(nombre, tipo, marca, stock, estado);
+
+                    // Pero le pasamos el ID al método modificar para saber cuál actualizar
+                    p.setIdProducto(id);
+                    productoData.modificarProducto(p);
+
+                    limpiarCampos();
+                    modelo.setRowCount(0);
+                    cargarDatosTabla();
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Faltan completar campos");
+                }
+
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Número no válido: " + ex.getMessage());
             }
+        
+    
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        try {
+            // Verifico que el campo de código no esté vacío
+            if (!this.jTFCodigo.getText().isEmpty()) {
+                int idProducto = Integer.parseInt(this.jTFCodigo.getText());
+                // Llamo al método de ProductoData para "eliminar" el producto (cambiar estado a 0)
+                productoData.eliminarProducto(idProducto);
+            }
+
+            // Limpio los campos del formulario
             limpiarCampos();
+            // Limpio la tabla y vuelvo a cargar los datos
             modelo.setRowCount(0);
             cargarDatosTabla();
         } catch (NumberFormatException ex) {
             System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
-        } 
-    }//GEN-LAST:event_jBModificarActionPerformed
-
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        // TODO add your handling code here:
-        try{
-            if(!this.jTFCodigo.getText().isEmpty()){
-                int matricula = Integer.parseInt(this.jTFCodigo.getText());
-                masajistaData.eliminarMasajista(matricula);
-            }
-            
-            limpiarCampos();
-            modelo.setRowCount(0);
-            cargarDatosTabla();
-        }catch(NumberFormatException ex){
-            System.out.println(ex.getLocalizedMessage());
-            JOptionPane.showMessageDialog(null, "Numero no valido" +ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Número no válido: " + ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el producto: " + ex.getMessage());
         }
+    
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jTFStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFStockActionPerformed
@@ -519,7 +548,7 @@ public class CargarProducto extends javax.swing.JInternalFrame {
     }
 
     private void armarCabecera() {
-        modelo.addColumn("Codigo");
+        modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Tipo");
         modelo.addColumn("Marca");
@@ -532,19 +561,23 @@ public class CargarProducto extends javax.swing.JInternalFrame {
         this.jTFCodigo.setText("");
         this.jTFNombre.setText("");
         this.jCBTipo.setSelectedItem(null);
+        this.jTFMarca.setText("");
         this.jTFStock.setText("");
         this.jRBEstado.setSelected(false);
     }
     
     private void cargarDatosTabla(){
-        ArrayList<Masajista> masajista = masajistaData.listarMasajista();
-        for(Masajista m : masajista){
-            if(m.isEstado()== true){
-                modelo.addRow(new Object[]{m.getMatricula(), m.getNombreApellido(), m.getEspecialidad(), m.getTelefono(), "Activo"});
-            }else{
-                modelo.addRow(new Object[]{m.getMatricula(), m.getNombreApellido(), m.getEspecialidad(), m.getTelefono(), "Inactivo"});
-            }
+        ArrayList<Producto> productos = productoData.listarProducto();
+        for (Producto p : productos) {
+            String estado = p.isEstado() ? "Activo" : "Inactivo";
+            modelo.addRow(new Object[]{
+                p.getIdProducto(),
+                p.getNombre(),
+                p.getTipo(),
+                p.getMarca(),
+                p.getStock(),
+                estado
+            });
         }
-    }
 
-}
+    }}
