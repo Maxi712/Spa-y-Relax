@@ -81,6 +81,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMMasajista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bodyX32.png"))); // NOI18N
         jMMasajista.setText("Masajista");
+        jMMasajista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMMasajistaActionPerformed(evt);
+            }
+        });
 
         jMIMasajista.setText("Cargar Masajista");
         jMIMasajista.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +107,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMSpa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/spa_5099674.png"))); // NOI18N
         jMSpa.setText("Spa");
+        jMSpa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMSpaActionPerformed(evt);
+            }
+        });
 
         jMICTratamiento.setText("Cargar Tratamiento");
         jMICTratamiento.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +162,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit_16560328.png"))); // NOI18N
         jMSalir.setText("Salir");
+        jMSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMSalirActionPerformed(evt);
+            }
+        });
 
         jMISalir.setText("Salir");
         jMISalir.addActionListener(new java.awt.event.ActionListener() {
@@ -263,6 +278,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.add(form);
         escritorio.moveToFront(form);
     }//GEN-LAST:event_jMIInformeActionPerformed
+
+    private void jMSpaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSpaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMSpaActionPerformed
+
+    private void jMMasajistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMMasajistaActionPerformed
+      escritorio.removeAll();
+        escritorio.repaint();
+        CargaMasajista form = new CargaMasajista();
+        form.setVisible(true);
+        escritorio.add(form);
+        escritorio.moveToFront(form);       // TODO add your handling code here:
+    }//GEN-LAST:event_jMMasajistaActionPerformed
+
+    private void jMSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMSalirActionPerformed
 
     /**
      * @param args the command line arguments
