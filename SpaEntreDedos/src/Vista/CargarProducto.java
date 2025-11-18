@@ -25,6 +25,8 @@ import spaentrededos.Producto;
  * @author Valentin Barros
  */
 public class CargarProducto extends javax.swing.JInternalFrame {
+    private String[] tiposProducto = {"Aceite", "Crema", "Jabón", "Exfoliante", "Loción"};
+
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -400,17 +402,20 @@ public class CargarProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarActionPerformed
-        // TODO add your handling code here:
+       
         try {
-            if (!this.jTFCodigo.getText().isEmpty()   && !this.jTFNombre.getText().isEmpty() && !this.jTFStock.getText().isEmpty()                 && this.jCBTipo.getSelectedItem() != null) {
+            if (!this.jTFNombre.getText().isEmpty()
+                    && !this.jTFStock.getText().isEmpty()
+                    && this.jCBTipo.getSelectedItem() != null) {
 
-                int id = Integer.parseInt(this.jTFCodigo.getText());
                 String nombre = this.jTFNombre.getText();
                 String tipo = (String) this.jCBTipo.getSelectedItem();
+                String marca = this.jTFMarca.getText();
                 int stock = Integer.parseInt(this.jTFStock.getText());
                 boolean estado = this.jRBEstado.isSelected();
 
-                Producto p = new Producto(id, nombre, tipo, stock, estado);
+                // Constructor sin ID, la DB se encarga del autoincremento
+                Producto p = new Producto(nombre, tipo, marca, stock, estado);
                 productoData.guardarProducto(p);
 
                 limpiarCampos();
@@ -424,58 +429,57 @@ public class CargarProducto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Número no válido: " + ex.getMessage());
         }
     
+    
     }//GEN-LAST:event_jBAgregarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
-        // TODO add your handling code here:
-        
-            try {
-                if (!jTFCodigo.getText().isEmpty()
-                        && !jTFNombre.getText().isEmpty()
-                        && !jTFStock.getText().isEmpty()
-                        && jCBTipo.getSelectedItem() != null) {
+       
+     
+        try {
+            if (!jTFCodigo.getText().isEmpty()
+                    && !jTFNombre.getText().isEmpty()
+                    && !jTFStock.getText().isEmpty()
+                    && jCBTipo.getSelectedItem() != null) {
 
-                    int id = Integer.parseInt(jTFCodigo.getText());
-                    String nombre = jTFNombre.getText();
-                    String tipo = (String) jCBTipo.getSelectedItem();
-                    String marca = jTFMarca.getText();
-                    int stock = Integer.parseInt(jTFStock.getText());
-                    boolean estado = jRBEstado.isSelected();
+                int id = Integer.parseInt(jTFCodigo.getText()); // ID del producto a modificar
+                String nombre = jTFNombre.getText();
+                String tipo = (String) jCBTipo.getSelectedItem();
+                String marca = jTFMarca.getText();
+                int stock = Integer.parseInt(jTFStock.getText());
+                boolean estado = jRBEstado.isSelected();
 
-                    // Usamos el constructor SIN ID porque se genera automáticamente
-                    Producto p = new Producto(nombre, tipo, marca, stock, estado);
+                // Creamos el producto sin ID
+                Producto p = new Producto(nombre, tipo, marca, stock, estado);
+                // Seteamos el ID para saber cuál modificar
+                p.setIdProducto(id);
+                productoData.modificarProducto(p);
 
-                    // Pero le pasamos el ID al método modificar para saber cuál actualizar
-                    p.setIdProducto(id);
-                    productoData.modificarProducto(p);
-
-                    limpiarCampos();
-                    modelo.setRowCount(0);
-                    cargarDatosTabla();
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "Faltan completar campos");
-                }
-
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Número no válido: " + ex.getMessage());
+                limpiarCampos();
+                modelo.setRowCount(0);
+                cargarDatosTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Faltan completar campos");
             }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Número no válido: " + ex.getMessage());
         
+    }
     
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         try {
-            // Verifico que el campo de código no esté vacío
+            
             if (!this.jTFCodigo.getText().isEmpty()) {
                 int idProducto = Integer.parseInt(this.jTFCodigo.getText());
                 // Llamo al método de ProductoData para "eliminar" el producto (cambiar estado a 0)
                 productoData.eliminarProducto(idProducto);
             }
 
-            // Limpio los campos del formulario
+           
             limpiarCampos();
-            // Limpio la tabla y vuelvo a cargar los datos
+     
             modelo.setRowCount(0);
             cargarDatosTabla();
         } catch (NumberFormatException ex) {
@@ -531,10 +535,9 @@ public class CargarProducto extends javax.swing.JInternalFrame {
         campo.setForeground(Color.DARK_GRAY);
         campo.setCaretColor(Color.GRAY); // color del curso
     }
-
     private void cargarCombo(JComboBox<String> comboBox) {
-        for (int i = 0; i < especialidaes.length; i++) {
-            comboBox.addItem(especialidaes[i]);
+        for (int i = 0; i < tiposProducto.length; i++) {
+            comboBox.addItem(tiposProducto[i]);
         }
     }
 
