@@ -143,7 +143,7 @@ public class TratamientoData {
                 
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno ..."+ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Tratamiento ..."+ex.getMessage());
         }
         return a;
     } 
