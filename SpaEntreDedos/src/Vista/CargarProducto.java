@@ -219,6 +219,12 @@ public class CargarProducto extends javax.swing.JInternalFrame {
         jLMarca.setForeground(new java.awt.Color(53, 94, 59));
         jLMarca.setText("Marca:");
 
+        jTFMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFMarcaKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPPrincipalLayout = new javax.swing.GroupLayout(jPPrincipal);
         jPPrincipal.setLayout(jPPrincipalLayout);
         jPPrincipalLayout.setHorizontalGroup(
@@ -498,6 +504,18 @@ public class CargarProducto extends javax.swing.JInternalFrame {
     private void jTFNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNombreActionPerformed
+
+    private void jTFMarcaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFMarcaKeyReleased
+        // TODO add your handling code here:
+        Pattern patron = Pattern.compile("[a-zA-Z_ \\t\\n\\x0B\\f\\r]+");
+        String nro = this.jTFMarca.getText();
+        Matcher m = patron.matcher(nro);
+        if (!m.matches() && nro.length() > 0) {
+            JOptionPane.showMessageDialog(this, "No es una letra");
+            this.jTFMarca.setText(nro.substring(0, nro.length() - 1));
+            this.jTFMarca.requestFocus();
+        }
+    }//GEN-LAST:event_jTFMarcaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

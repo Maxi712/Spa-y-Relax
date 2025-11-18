@@ -226,12 +226,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jMICTratamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMICTratamientoActionPerformed
         // TODO add your handling code here:
-        /*escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         CargarTratamiento form = new CargarTratamiento();
         form.setVisible(true);
         escritorio.add(form);
-        escritorio.moveToFront(form);*/
+        escritorio.moveToFront(form);
     }//GEN-LAST:event_jMICTratamientoActionPerformed
 
     private void jMIHorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIHorariosActionPerformed

@@ -36,7 +36,7 @@ import spaentrededos.Sesion;
  *
  * @author Valentin Barros
  */
-public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
+public class ListarInstalcionesPorFecha extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -49,7 +49,7 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
     private MasajistaData masajistaData = new MasajistaData();
     InstalacionData insData=new InstalacionData();
     
-    public ListarInstalcionesLibres() {
+    public ListarInstalcionesPorFecha() {
         initComponents();
         cambiarTextField(this.jTFHora1);
         cambiarTextField(this.jTFHora2);
@@ -326,7 +326,7 @@ public class ListarInstalcionesLibres extends javax.swing.JInternalFrame {
         ArrayList<Instalacion>hlista=new ArrayList();
         hlista=insData.listarInstalaciones();
         for(int h=9;h<18;h++){
-            LocalTime inicio 
+            LocalTime inicio ;
         }
     }
 

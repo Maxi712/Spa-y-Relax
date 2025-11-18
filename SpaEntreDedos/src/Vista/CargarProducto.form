@@ -387,6 +387,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFMarca">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTFMarcaKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
