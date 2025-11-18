@@ -21,15 +21,15 @@ public class Test {
     public static void main(String[] args) {
        Conexion conexion = new Conexion () ; 
        final entidadData entidadData = new entidadData (conexion ) ; 
-       Cliente a =new Cliente(1,44738237,"Castro Maximiliano",26601927,20,"Ninguna", true);
+       Cliente a =new Cliente(1,44738237,"Castro Maximiliano","26601927",20,"Ninguna", true);
        entidadData.guardarCliente(a);
-       Cliente b =new Cliente(2,40238734,"Barros Edgardo",26632763,26,"Ninguna", true);
+       Cliente b =new Cliente(2,40238734,"Barros Edgardo","26632763",26,"Ninguna", true);
        entidadData.guardarCliente(b);
-       Cliente c =new Cliente(3,41934744,"Carrizo Anna",266387424,24,"Ninguna", true);
+       Cliente c =new Cliente(3,41934744,"Carrizo Anna","266387424",24,"Ninguna", true);
        entidadData.guardarCliente(c);
-       Cliente d =new Cliente(4,40238274,"Gimenez Pablo",266372834,23,"Ninguna", true);
+       Cliente d =new Cliente(4,40238274,"Gimenez Pablo","266372834",23,"Ninguna", true);
        entidadData.guardarCliente(d);
-       Cliente e =new Cliente(5,42293843,"Fernandez Rodrigo",26635233,24,"Ninguna", true);
+       Cliente e =new Cliente(5,42293843,"Fernandez Rodrigo","26635233",24,"Ninguna", true);
        entidadData.guardarCliente(e);
        entidadData.guardarCliente(a);
        entidadData.guardarCliente(b);

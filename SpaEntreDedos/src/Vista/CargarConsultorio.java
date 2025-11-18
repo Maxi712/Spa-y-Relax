@@ -5,10 +5,12 @@
  */
 package Vista;
 
+import Persistencia.ConsultorioData;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
@@ -21,6 +23,8 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import spaentrededos.Consultorio;
+
 
 /**
  *
@@ -34,7 +38,8 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
             return false;
         }
     };
-
+ 
+    private ConsultorioData consultorioData = new ConsultorioData();
     /**
      * Creates new form CargaMasajista
      */
@@ -44,6 +49,7 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
         cambiarTextField(this.jTFUsos);
         cambiarTextField(this.jTFEquipamiento);
         armarCabecera();
+        armarTabla();
     }
 
     /**
@@ -114,6 +120,11 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
         jBBuscar.setBackground(new java.awt.Color(249, 246, 238));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/LUPAX16.png"))); // NOI18N
         jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jLUsos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLUsos.setForeground(new java.awt.Color(53, 94, 59));
@@ -325,8 +336,16 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try{
             if(!this.jTFNumero.getText().isEmpty() && !this.jTFUsos.getText().isEmpty() && !this.jTFEquipamiento.getText().isEmpty()){
-                
+                int numero = Integer.parseInt(this.jTFNumero.getText());
+                String uso = this.jTFUsos.getText();
+                String equipamiento = this.jTFEquipamiento.getText();
+                boolean apto = this.jRBApto.isSelected();
+                Consultorio c = new Consultorio(numero, uso, equipamiento, apto);
+                consultorioData.guardarConsultorio(c);
             }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            armarTabla();
         }catch (NumberFormatException ex) {
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
@@ -336,7 +355,17 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
         // TODO add your handling code here:
         try{
-            
+            if(!this.jTFNumero.getText().isEmpty() && !this.jTFUsos.getText().isEmpty() && !this.jTFEquipamiento.getText().isEmpty()){
+                int numero = Integer.parseInt(this.jTFNumero.getText());
+                String uso = this.jTFUsos.getText();
+                String equipamiento = this.jTFEquipamiento.getText();
+                boolean apto = this.jRBApto.isSelected();
+                Consultorio c = new Consultorio(numero, uso, equipamiento, apto);
+                consultorioData.guardarConsultorio(c);
+            }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            armarTabla();
         }catch (NumberFormatException ex) {
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
@@ -346,12 +375,32 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         // TODO add your handling code here:
         try{
-            
+            if(!this.jTFNumero.getText().isEmpty()){
+                int numero= Integer.parseInt(this.jTFNumero.getText());
+                consultorioData.eliminarConsultorio(numero);
+            }
+            limpiarCampos();
+            modelo.setRowCount(0);
+            armarTabla();
         }catch (NumberFormatException ex) {
             System.out.println(ex.getLocalizedMessage());
             JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        // TODO add your handling code here:
+        try {
+            Consultorio c = consultorioData.buscarPorNro(Integer.parseInt(this.jTFNumero.getText()));
+            this.jTFNumero.setText(Integer.toString(c.getNroConsultorio()));
+            this.jTFUsos.setText(c.getUsos());
+            this.jTFEquipamiento.setText(c.getEquipamiento());
+            this.jRBApto.setSelected(c.isApto());
+        } catch (NumberFormatException ex) {
+            System.out.println(ex.getLocalizedMessage());
+            JOptionPane.showMessageDialog(null, "Numero no valido" + ex.getMessage());
+        }
+    }//GEN-LAST:event_jBBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -394,4 +443,21 @@ public class CargarConsultorio extends javax.swing.JInternalFrame {
         jTConsultorio.setModel(modelo);
     }
     
+    private void limpiarCampos(){
+        this.jTFNumero.setText("");
+        this.jTFUsos.setText("");
+        this.jTFEquipamiento.setText("");
+        this.jRBApto.setSelected(false);
+    }
+    
+    private void armarTabla(){
+        ArrayList<Consultorio> consultorio = new ArrayList();
+        for(Consultorio c : consultorio){
+            if(c.isApto()== true){
+                modelo.addRow(new Object[]{c.getNroConsultorio(), c.getUsos(), c.getNroConsultorio(), "Activo"});
+            }else{
+                modelo.addRow(new Object[]{c.getNroConsultorio(), c.getUsos(), c.getNroConsultorio(), "Inactivo"});
+            }
+        }
+    }
 }

@@ -21,7 +21,7 @@ import spaentrededos.Consultorio;
  *
  * @author carri
  */
-class ConsultorioData {
+public class ConsultorioData {
     private Connection conexion;
     
     public ConsultorioData(){
