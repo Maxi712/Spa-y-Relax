@@ -125,18 +125,20 @@ public class TratamientoData {
     }
     
     public Tratamiento buscarPorCod(int codTratamiento){
-        String sql = "SELECT * FROM alumno WHERE idAlumno =?";
-        Alumno a = new Alumno();
+        String sql = "SELECT * FROM tratamiento WHERE codTratamiento =?";
+        Tratamiento a = new Tratamiento();
+         
         try{
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
+             ps.setInt(1, codTratamiento);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                a.setIdAlumno(rs.getInt("idAlumno"));
-                a.setDni(rs.getInt("dni"));
-                a.setApellido(rs.getString("apellido"));
+                a.setCodTratam(rs.getInt("codTratamiento"));
                 a.setNombre(rs.getString("nombre"));
-                a.setFechaNacimiento(rs.getDate("fechaNacimiento").toLocalDate());
+                a.setTipo(rs.getString("tipo"));
+                a.setDetalle(rs.getString("detalle"));
+                a.setDuracion(rs.getTime("duracion").toLocalTime());
+                a.setCosto(rs.getDouble("costo"));
                 a.setEstado(rs.getBoolean("estado"));
                 
             }
