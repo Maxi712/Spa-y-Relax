@@ -5,6 +5,19 @@
  */
 package Vista;
 
+import Modelo.Conexion;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import spaentrededos.Dia_De_Spa;
+import Persistencia.Dia_De_SpaData;
+import Persistencia.ClienteData;
+import spaentrededos.Cliente;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.Objects;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author carri
@@ -14,8 +27,17 @@ public class ListarDia_De_Spa extends javax.swing.JInternalFrame {
     /**
      * Creates new form ListarDia_De_Spa
      */
+    private DefaultTableModel modeloTabla;
+    private Dia_De_SpaData diaDeSpaData;
+    private ClienteData clienteData;
     public ListarDia_De_Spa() {
         initComponents();
+        diaDeSpaData = new Dia_De_SpaData(Conexion.getConexion());
+        clienteData = new Dia_De_SpaData(Conexion.getConexion());
+        String[] titulos = {"Cliente", "Preferencias", "Fecha y Hora", "Monto", "Estado"};
+        modeloTabla = new DefaultTableModel(null, titulos);
+        jTablaSpa.setModel(modeloTabla);
+        cargarDatosTabla();
     }
 
     /**
@@ -28,15 +50,17 @@ public class ListarDia_De_Spa extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablaSpa = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTidDiaSpa = new javax.swing.JTextField();
+        jTidCliente = new javax.swing.JTextField();
         jPTitulo = new javax.swing.JPanel();
         jLTitulo = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jTablaSpa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -47,7 +71,7 @@ public class ListarDia_De_Spa extends javax.swing.JInternalFrame {
                 "Cliente", "Preferencias ", "Fecha y Hora", "Monto", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablaSpa);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(53, 94, 59));
@@ -56,10 +80,6 @@ public class ListarDia_De_Spa extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(53, 94, 59));
         jLabel2.setText("ID Cliente");
-
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
 
         jPTitulo.setBackground(new java.awt.Color(53, 94, 59));
 
@@ -93,19 +113,19 @@ public class ListarDia_De_Spa extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTidDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTidCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,9 +135,9 @@ public class ListarDia_De_Spa extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTidDiaSpa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTidCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -133,8 +153,30 @@ public class ListarDia_De_Spa extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPTitulo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jTablaSpa;
+    private javax.swing.JTextField jTidCliente;
+    private javax.swing.JTextField jTidDiaSpa;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarDatosTabla() {
+    modeloTabla.setRowCount(0);
+    try{
+        List<Dia_De_Spa> listaDiasDeSpa = diaDeSpaData.listarDiasDeSpa();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        for(Dia_De_Spa diaSpa: listaDiasDeSpa){
+            int codCliente = diaSpa.getCliente().getCodCli();
+            Cliente cliente = clienteData.buscarClientePorId(codCliente);
+            String nombreCliente = (cliente != null) ? cliente.getNombreCompleto() : "Desconocido";
+            Object[] fila = new Objects[5];
+            fila[0] = nombreCliente;
+            fila[1] = diaSpa.getPreferencias();
+            fila[2] = diaSpa.getFechaYHora().format(formatter);
+            fila[3] = diaSpa.getMonto();
+            fila[4] = diaSpa.isEstado() ? "Activo" : "Eliminado/Finalizado";
+            modeloTabla.addRow(fila);
+        }
+    } catch(Exception ex){
+        JOptionPane.showMessageDialog(this, "Error al cargar la lista: " +ex.getMessage());
+    }
+    }
 }
